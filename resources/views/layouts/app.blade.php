@@ -17,6 +17,7 @@
 
 <div id="app">
 
+    <div id="pageHeader">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -72,15 +73,14 @@
             </div>
         </div>
     </nav>
+    </div>
 
     <div id="pageContent">
         @yield('content')
     </div>
 
     <div id="pageFooter">
-        @component('footer.php')
-            <strong>Whoops!</strong> Something went wrong!
-        @endcomponent
+        @include('layouts.footer', ['some' => 'data'])
     </div>
 
 </div>

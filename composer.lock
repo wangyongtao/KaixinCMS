@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96098e473b028cdb2529580554a1ae3e",
+    "content-hash": "dfa57c39f21ef8d4073a37745ef5492e",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1863,6 +1863,132 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "wangyongtao/laravel-cn-regions",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wangyongtao/laravel-cn-regions.git",
+                "reference": "74e31befb402c19cf9ec698daa8b06f4dbf5cfaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/wangyongtao/laravel-cn-regions/74e31befb402c19cf9ec698daa8b06f4dbf5cfaf.zip",
+                "reference": "74e31befb402c19cf9ec698daa8b06f4dbf5cfaf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.4.20",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wangyongtao\\CNRegions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "wangyongtao",
+                    "email": "wangtom365@qq.com"
+                }
+            ],
+            "description": "Laravel-CN-Regions: China Regions",
+            "time": "2017-05-22T14:54:51+00:00"
+        },
+        {
+            "name": "watercart/shoppingcart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/watercart/shoppingcart.git",
+                "reference": "ec09d9d81fe71dda7124e6817c90a5d18f5ba022"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/watercart/shoppingcart/ec09d9d81fe71dda7124e6817c90a5d18f5ba022.zip",
+                "reference": "ec09d9d81fe71dda7124e6817c90a5d18f5ba022",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Watercart\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "watercart",
+                    "email": "cnwyt@outlook.com"
+                }
+            ],
+            "description": "Laravel-Shoppingcart.",
+            "homepage": "https://github.com/watercart/shoppingcart",
+            "keywords": [
+                "Watercart",
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2017-05-23T02:42:14+00:00"
+        },
+        {
+            "name": "wateringcart/laravel-posts",
+            "version": "v0.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wateringcart/laravel-posts.git",
+                "reference": "de30f70a8927077a15377c07e7538e694573d069"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/wateringcart/laravel-posts/de30f70a8927077a15377c07e7538e694573d069.zip",
+                "reference": "de30f70a8927077a15377c07e7538e694573d069",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wateringcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wateringcart",
+                    "email": "wateringcart@outlook.com"
+                }
+            ],
+            "description": "Laravel-Posts.",
+            "homepage": "https://github.com/wateringcart/laravel-posts",
+            "keywords": [
+                "laravel",
+                "laravel-posts"
+            ],
+            "time": "2017-05-22T14:31:50+00:00"
         }
     ],
     "packages-dev": [
@@ -2580,16 +2706,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.19",
+            "version": "5.7.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/69c4f49ff376af2692bad9cebd883d17ebaa98a1.zip",
-                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/3cb94a5f8c07a03c8b7527ed7468a2926203f58b.zip",
+                "reference": "3cb94a5f8c07a03c8b7527ed7468a2926203f58b",
                 "shasum": ""
             },
             "require": {
@@ -2607,7 +2733,7 @@
                 "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "^3.2",
                 "sebastian/comparator": "^1.2.4",
-                "sebastian/diff": "~1.2",
+                "sebastian/diff": "^1.4.3",
                 "sebastian/environment": "^1.3.4 || ^2.0",
                 "sebastian/exporter": "~2.0",
                 "sebastian/global-state": "^1.1",
@@ -2658,7 +2784,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-04-03T02:22:27+00:00"
+            "time": "2017-05-22T07:42:55+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2830,16 +2956,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2"
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/diff/3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2.zip",
-                "reference": "3c7d21999e815cdfac70c6c7d79d3a9cb1bc7bc2",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/diff/7f066a26a962dbe58ddea9f72a4e82874a3975a4.zip",
+                "reference": "7f066a26a962dbe58ddea9f72a4e82874a3975a4",
                 "shasum": ""
             },
             "require": {
@@ -2878,7 +3004,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-05-18T13:44:30+00:00"
+            "time": "2017-05-22T07:24:03+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -3340,7 +3466,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "wangyongtao/laravel-cn-regions": 20,
+        "watercart/shoppingcart": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

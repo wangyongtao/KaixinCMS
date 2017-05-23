@@ -20,5 +20,9 @@ $ php artisan make:auth
 $ php artisan migrate
 
 
+* Remove The cached Blade views 
+
+$ php artisan view:clear 
+
 
 https://laravel.com/docs/5.4/installation
