@@ -10,7 +10,7 @@
         "laravel/tinker": "~1.0",
         "wangyongtao/laravel-cn-regions": "dev-master",
         "watercart/shoppingcart": "~0.0.4",
-        "wateringcart/laravel-posts": "^0.0.4"
+        "Watercart/laravel-posts": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -50,5 +50,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/watercart/laravel-posts"
+        }
+    ]
 }

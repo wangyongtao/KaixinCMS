@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dfa57c39f21ef8d4073a37745ef5492e",
+    "content-hash": "fc20f1116a32bb890c30b7039262c916",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1902,17 +1902,64 @@
             "time": "2017-05-22T14:54:51+00:00"
         },
         {
-            "name": "watercart/shoppingcart",
+            "name": "watercart/laravel-posts",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/watercart/shoppingcart.git",
-                "reference": "ec09d9d81fe71dda7124e6817c90a5d18f5ba022"
+                "url": "https://github.com/watercart/laravel-posts.git",
+                "reference": "5c8ccacd2ff9d70e970ab199d6ed799521fc8541"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/watercart/shoppingcart/ec09d9d81fe71dda7124e6817c90a5d18f5ba022.zip",
-                "reference": "ec09d9d81fe71dda7124e6817c90a5d18f5ba022",
+                "url": "https://api.github.com/repos/watercart/laravel-posts/zipball/5c8ccacd2ff9d70e970ab199d6ed799521fc8541",
+                "reference": "5c8ccacd2ff9d70e970ab199d6ed799521fc8541",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Watercart\\Posts\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "watercart",
+                    "email": "cnwyt@outlook.com"
+                }
+            ],
+            "description": "Laravel-Posts",
+            "homepage": "https://github.com/watercart/laravel-posts",
+            "keywords": [
+                "laravel",
+                "laravel-posts"
+            ],
+            "support": {
+                "source": "https://github.com/watercart/laravel-posts/tree/master",
+                "issues": "https://github.com/watercart/laravel-posts/issues"
+            },
+            "time": "2017-05-24T23:18:13+00:00"
+        },
+        {
+            "name": "watercart/shoppingcart",
+            "version": "v0.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/watercart/shoppingcart.git",
+                "reference": "18e907162805bb15ea5dea7d7833aadc52b0f15f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/watercart/shoppingcart/18e907162805bb15ea5dea7d7833aadc52b0f15f.zip",
+                "reference": "18e907162805bb15ea5dea7d7833aadc52b0f15f",
                 "shasum": ""
             },
             "require": {
@@ -1944,51 +1991,7 @@
                 "laravel",
                 "shoppingcart"
             ],
-            "time": "2017-05-23T02:42:14+00:00"
-        },
-        {
-            "name": "wateringcart/laravel-posts",
-            "version": "v0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wateringcart/laravel-posts.git",
-                "reference": "de30f70a8927077a15377c07e7538e694573d069"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/wateringcart/laravel-posts/de30f70a8927077a15377c07e7538e694573d069.zip",
-                "reference": "de30f70a8927077a15377c07e7538e694573d069",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Wateringcart\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Wateringcart",
-                    "email": "wateringcart@outlook.com"
-                }
-            ],
-            "description": "Laravel-Posts.",
-            "homepage": "https://github.com/wateringcart/laravel-posts",
-            "keywords": [
-                "laravel",
-                "laravel-posts"
-            ],
-            "time": "2017-05-22T14:31:50+00:00"
+            "time": "2017-05-23T15:01:11+00:00"
         }
     ],
     "packages-dev": [
@@ -3468,7 +3471,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "wangyongtao/laravel-cn-regions": 20,
-        "watercart/shoppingcart": 20
+        "watercart/laravel-posts": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
