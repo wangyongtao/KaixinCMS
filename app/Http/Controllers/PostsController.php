@@ -52,9 +52,9 @@ class PostsController extends Controller
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['category'] = (new CategoriesModel())->getList();
-print_r($data);exit;
-        $data['categoryCount'] = (new PostModel())->getListCountGroupByCategory();
+        $data['categoryList'] = (new CategoriesModel())->getList();
+        // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
+// print_r($data);exit;
 
         $data['listData'] = $result;
 

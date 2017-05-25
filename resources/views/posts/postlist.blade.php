@@ -1,6 +1,6 @@
 {{--  --}}
 
-@extends('posts.layout')
+@extends('layouts.posts')
 
 {{-- META标题、关键词、描述等 --}}
 @section('title')
@@ -13,11 +13,11 @@ Wang123.net @endsection
     @parent
 
     <ul class="list-group">
-    @foreach ($category as $rows)
-        <a href="/article/category-{{ $rows['name_en'] }}">
+    @foreach ($categoryList as $rows)
+        <a href="/article/category-{{ $rows['category_name_en'] }}">
             <li class="list-group-item">
-                <strong> {{ $rows['name'] }} </strong>
-                <span class="badge">{{ isset($categoryCount[$rows['name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span>
+                <strong> {{ $rows['category_name'] }} </strong>
+                <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span>
             </li>
         </a>
     @endforeach
@@ -25,7 +25,7 @@ Wang123.net @endsection
 
 @endsection
 
-@section('mainContent')
+@section('content')
 
 
 <ol class="breadcrumb">
@@ -38,7 +38,7 @@ Wang123.net @endsection
             @foreach ($listData['data'] as $rows)
                 <div title="{{ $rows['title'] }}">
                         <div class="article-title">
-                        <a href="/a/detail-{{ $rows['id'] }}.html"> {{ $rows['title'] }} </a>
+                        <a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['title'] }} </a>
                         </div>
                         <hr>
                 </div>

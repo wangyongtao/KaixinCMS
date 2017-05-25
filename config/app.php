@@ -235,4 +235,7 @@ return [
 
     ],
 
+    // BaiduTongji Code URL:
+    // Example: "https://hm.baidu.com/hm.js?5df404c6ca6b0e31dd69fcb8d3517d85"
+    'BAIDU_TONGJI' => env('BAIDU_TONGJI', ''),
 ];
