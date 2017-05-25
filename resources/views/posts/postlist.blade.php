@@ -1,6 +1,6 @@
 {{--  --}}
 
-@extends('layouts.app')
+@extends('posts.layout')
 
 {{-- META标题、关键词、描述等 --}}
 @section('title')
@@ -25,7 +25,7 @@ Wang123.net @endsection
 
 @endsection
 
-@section('content')
+@section('mainContent')
 
 
 <ol class="breadcrumb">

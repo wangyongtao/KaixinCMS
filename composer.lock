@@ -1907,12 +1907,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/watercart/laravel-admins.git",
-                "reference": "909f791e6889f1470ac58c1da6394dddd5c44959"
+                "reference": "f74ff9ffe590925e4f391d60a3a63f4cdcb9ef7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/watercart/laravel-admins/zipball/909f791e6889f1470ac58c1da6394dddd5c44959",
-                "reference": "909f791e6889f1470ac58c1da6394dddd5c44959",
+                "url": "https://api.github.com/repos/watercart/laravel-admins/zipball/f74ff9ffe590925e4f391d60a3a63f4cdcb9ef7e",
+                "reference": "f74ff9ffe590925e4f391d60a3a63f4cdcb9ef7e",
                 "shasum": ""
             },
             "require": {
@@ -1946,7 +1946,7 @@
                 "source": "https://github.com/watercart/laravel-admins/tree/master",
                 "issues": "https://github.com/watercart/laravel-admins/issues"
             },
-            "time": "2017-05-25T10:23:47+00:00"
+            "time": "2017-05-25T14:46:08+00:00"
         },
         {
             "name": "watercart/laravel-posts",
@@ -2021,6 +2021,7 @@
                     "Watercart\\Shoppingcart\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2033,14 +2034,10 @@
             "description": "Laravel-Shoppingcart.",
             "homepage": "https://github.com/watercart/shoppingcart",
             "keywords": [
+                "Watercart",
                 "laravel",
-                "shoppingcart",
-                "watercart"
+                "shoppingcart"
             ],
-            "support": {
-                "source": "https://github.com/watercart/shoppingcart/tree/v0.0.8",
-                "issues": "https://github.com/watercart/shoppingcart/issues"
-            },
             "time": "2017-05-23T15:01:11+00:00"
         }
     ],

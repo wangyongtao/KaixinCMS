@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Watercart\Posts\Posts as PostModel;
-use Watercart\Posts\PostCategory as PostCategoryModel;
+use Watercart\Admins\Posts as PostModel;
+use Watercart\Admins\Categories as CategoriesModel;
 
 class PostsController extends Controller
 {
@@ -52,8 +52,8 @@ class PostsController extends Controller
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['category'] = (new PostCategoryModel())->getArticleCategory();
-
+        $data['category'] = (new CategoriesModel())->getList();
+print_r($data);exit;
         $data['categoryCount'] = (new PostModel())->getListCountGroupByCategory();
 
         $data['listData'] = $result;
