@@ -179,6 +179,7 @@ return [
 
         Watercart\Shoppingcart\CartServiceProvider::class,
         Watercart\Posts\PostsServiceProvider::class,
+        Watercart\Admins\AdminsServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Cart' => Watercart\Shoppingcart\Facades\Cart::class,
+        'Posts' => Watercart\Shoppingcart\Facades\Posts::class,
 
     ],
 

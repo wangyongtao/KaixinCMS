@@ -10,9 +10,8 @@
         "laravel/tinker": "~1.0",
         "wangyongtao/laravel-cn-regions": "dev-master",
         "watercart/shoppingcart": ">=0.0.5",
-        "watercart/laravel-admins": ">=0.0.1",
-        "watercart/laravel-posts": ">=0.0.2",
-        "wateringcart/laravel-posts": "^0.0.4"
+        "watercart/laravel-admins": "dev-master",
+        "watercart/laravel-posts": ">=0.0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

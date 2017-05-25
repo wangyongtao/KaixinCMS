@@ -31,33 +31,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-
-        Schema::create('user_login', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->integer('user_id')->default(0)->comment('user-id');
-            $table->string('login_ip', 30)->comment('login-ip');
-            $table->string('login_place', 30)->comment('login-place');
-            $table->string('user_agent', 255)->comment('login-useragent');
-            $table->string('platform', 30)->comment('login-platform');
-            $table->string('platfor_mversion', 30)->comment('login-platform-version');
-            $table->string('brower', 30)->comment('login-platform');
-            $table->string('brower_version', 30)->comment('login-brower-version');
-            $table->string('device', 30)->comment('login-device');
-            $table->string('source', 255)->comment('login-source');
-            $table->dateTime('created_at'); 
-        });
-
-        Schema::create('user_logs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->default(0)->comment('user-id');
-            $table->string('module', 50)->comment('action');
-            $table->string('action', 50)->comment('action');
-            $table->string('description', 255)->comment('description');
-            $table->string('user_agent', 255)->comment('login-useragent');
-            $table->text('content')->comment('detail-content');
-            $table->dateTime('created_at'); 
-        });
     }
 
     /**
