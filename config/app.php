@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Watercart\Shoppingcart\CartServiceProvider::class,
+        Watercart\Posts\PostsServiceProvider::class,
 
     ],
 
@@ -228,7 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Cart' => Watercart\Shoppingcart\CartFacade::class,
+        'Cart' => Watercart\Shoppingcart\Facades\Cart::class,
 
     ],
 
