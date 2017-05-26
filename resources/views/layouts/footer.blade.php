@@ -2,7 +2,7 @@
 ========================================-->
 <footer class="page-footer">
     <div class="container help">
-     <div class="row">
+<!--      <div class="row">
         <div class="col-md-4">
              <h4 class="title">关于</h4>
              <ul class="page-footer-links">
@@ -29,7 +29,7 @@
                  <li><a href="/">更多链接</a></li>
              </ul>
         </div>
-     </div>
+     </div> -->
     </div>
 
     <div class="container copyright">
