@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>管理后台 - {{ config('app.name', 'Admin') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body id="app">
 
@@ -27,17 +28,38 @@
                     <span class="icon-bar"></span>
                 </button>
 
+
+
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    管理后台
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
+                    @if ( Request::is('admins/posts') )
+                        <li class="active"><a href="{{ route('admin-posts') }}">文章</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-posts') }}">文章</a></li>
+                    @endif
+                    @if ( Request::is('admins/categories') )
+                        <li class="active"><a href="{{ route('admin-category') }}">分类</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-category') }}">分类</a></li>
+                    @endif                        
+                    @if ( Request::is('admins/links') )
+                        <li class="active"><a href="{{ route('admin-links') }}">链接</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-links') }}">链接</a></li>
+                    @endif
+                    @if ( Request::is('admins/users') )
+                        <li class="active"><a href="{{ route('admin-users') }}">用户</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-users') }}">用户</a></li>
+                    @endif   
+                    </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -73,32 +95,31 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2" style="font-size:12px">
             @section('sidebar')
-            <div class="list-group">
+
+<!--             <div class="list-group">
 			  <a href="#" class="list-group-item active">
-			    Cras justo odio
+			    管理后台
 			  </a>
-			  <a href="/admins/posts" class="list-group-item"> > 文章管理 (Posts)</a>
+			  <a href="/admins/posts" class="list-group-item"> > 文章 (Posts)</a>
 
-			  <a href="/admins/categories" class="list-group-item"> > 分类管理 (Categories)</a>
+			  <a href="/admins/categories" class="list-group-item"> > 分类 (Categories)</a>
 
+			  <a href="/admins/links" class="list-group-item"> > 链接 (Links)</a>
 
-			  <a href="/admins/links" class="list-group-item"> > 链接管理 (Links)</a>
+			  <a href="/admins/users" class="list-group-item"> > 用户 (Users)</a>
 
-			  <a href="/admins/users" class="list-group-item"> > 用户管理 (Users)</a>
-
-			</div>
+			</div> -->
             @show
             </div>
-            <div class="col-md-9"> @yield('content') </div>
+            <div class="col-md-10"> @yield('content') </div>
         </div>
     </div>
 
     @include('layouts.footer')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

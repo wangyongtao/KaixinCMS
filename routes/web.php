@@ -11,24 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // Authentication
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-// posts
+Route::get('/', 'PostsController@index')->name('index');
+Route::get('/home', 'PostsController@index')->name('home');
+ 
 Route::group(['prefix' => 'posts'], function (){
     Route::get('/', 'PostsController@showList');
     Route::get('/category/{$categoryName}', 'PostsController@showCategory');
@@ -45,10 +37,13 @@ Route::group(['prefix' => 'posts'], function (){
 // posts
 Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
-    Route::get('/posts', 'Admins\PostController@index');
+    Route::get('/posts', 'Admins\PostController@index')->name('admin-posts');
     Route::get('/posts/add', 'Admins\PostController@add');
     Route::get('/posts/edit/{id}', 'Admins\PostController@edit');
     Route::post('/posts/add', 'Admins\PostController@add');
     Route::post('/posts/edit/{id}', 'Admins\PostController@edit');
 
+    Route::get('/categories', 'Admins\CategoryController@index')->name('admin-category');
+    Route::get('/links', 'Admins\LinkController@index')->name('admin-links');
+    Route::get('/users', 'Admins\UserController@index')->name('admin-users');
 });

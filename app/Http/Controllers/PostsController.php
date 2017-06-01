@@ -8,6 +8,11 @@ use Watercart\Admins\Categories as CategoriesModel;
 
 class PostsController extends Controller
 {
+    public function index(Request $request, $id = 0)
+    {
+        return $this->showList($request);
+    }
+    
     /**
      * 详情
      * @return \Illuminate\View\View

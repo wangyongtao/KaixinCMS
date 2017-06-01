@@ -7,52 +7,70 @@
     @parent
 
     <ul class="list-group">
-    @foreach ($categoryList as $rows)
-        <a href="/article/category-{{ $rows['category_name_en'] }}">
+        <li class="list-group-item active">文章管理</li>
+        @foreach ($categoryList as $rows)
             <li class="list-group-item">
-                <strong> {{ $rows['category_name'] }} </strong>
-                <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span>
+                <a href="/admins/posts?category={{ $rows['category_name_en'] }}">
+                    <strong> {{ $rows['category_name'] }} </strong>
+                    <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span></a>
             </li>
-        </a>
-    @endforeach
-</ul>
+            
+        @endforeach
+    </ul>
 
 @endsection
 
 @section('content')
-
 
 <ol class="breadcrumb">
   <li><a href="/">首页</a></li>
   <li><a href="/article/all" class="active">文章列表</a></li>
 </ol>
 
-    <div class="">
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        筛选
+        </div>
+      <div class="panel-body">
+        Basic panel example
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+         文章列表 <a href="/admins/posts/add" class="btn btn-xs btn-success">  新增文章 </a>
+      </div>
+      <div class="panel-body">
+
+        
         @if ($listData['data'])
 
             <table class="table table-striped">
-		        <tr>
-		          <th>编号</th>
-		          <th>标题</th>
-		          <th>最后更新</th>
-		          <th>操作</th>
-		        </tr>
+                <tr>
+                  <th>编号</th>
+                  <th>标题</th>
+                  <th>最后更新</th>
+                  <th>操作</th>
+                </tr>
             @foreach ($listData['data'] as $rows)
 
-		        <tr>
-		          <th scope="row">{{ $rows['id'] }}</th>
-		          <td><a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['title'] }} </a> </td>
-		          <td>{{ $rows['updated_at'] ?: '--' }}</td>
-		          <td>
-		          <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
-		          </td>
-		        </tr>
+                <tr>
+                  <th scope="row">{{ $rows['id'] }}</th>
+                  <td><a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['title'] }} </a> </td>
+                  <td>{{ $rows['updated_at'] ?: '--' }}</td>
+                  <td>
+                  <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
+                  </td>
+                </tr>
  
             @endforeach
-			</table>
+            </table>
 
         @endif
+        </div>
     </div>
+</div>
  
     <!-- 显示分页 -->
     <nav aria-label="...">

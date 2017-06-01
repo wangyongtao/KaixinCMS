@@ -2,9 +2,30 @@
 
 @extends('admins.layouts.home')
 
+@section('sidebar')
+    @parent
+
+    <ul class="list-group">
+        <li class="list-group-item active">文章管理</li>
+        @foreach ($categoryList as $rows)
+            <li class="list-group-item">
+                <a href="/admins/posts?category={{ $rows['category_name_en'] }}">
+                    <strong> {{ $rows['category_name'] }} </strong>
+                    <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span></a>
+            </li>
+            
+        @endforeach
+    </ul>
+
+@endsection
 
 @section('content')
 
+<ol class="breadcrumb">
+  <li><a href="/">首页</a></li>
+  <li><a href="/admins/posts">文章列表</a></li>
+  <li><a href="#" class="active">编辑</a></li>
+</ol>
 
 <!-- umeditor
 ================================================== -->
@@ -14,7 +35,8 @@
 <script src="/assets/umeditor/umeditor.min.js" type="text/javascript"></script>
 <script src="/assets/umeditor/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
 
- 
+<div class="main">
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">文章编辑 (<?php if(isset($detail['id'])){echo $detail['id'];}?>)</h3>
@@ -38,9 +60,9 @@
             </div>
  
             <div class="form-group">
-                <label class="col-md-3 control-label" for="source">来源链接</label>
+                <label class="col-md-3 control-label" for="source_link">来源链接</label>
                 <div class="col-md-8">
-                    <input placeholder="网站链接" class="form-control" id="source" name="source" size="50" type="email" value="<?php if(isset($detail['source'])){echo $detail['source'];}?>" />
+                    <input placeholder="网站链接" class="form-control" id="source_link" name="source_link" size="50" type="text" value="<?php if(isset($detail['source_link'])){echo $detail['source_link'];}?>" />
                 </div>
             </div>
             <div class="form-group">
@@ -86,6 +108,7 @@
 
         </div>
     </div>
+</div>
  
 <!-- JavaScript 
 ==========================================================-->
@@ -118,7 +141,7 @@ var options = {
 //设置初始进度条长度
 // TopProgressBar.setProgress(30);
 
-var requestUrl = '/article/edit/{{$detail['id']}}';
+var requestUrl = '/admins/posts/edit/{{$detail['id']}}';
 // Specify a function to execute when the DOM is fully loaded.
 $( document ).ready(function() {
 

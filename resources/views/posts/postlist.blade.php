@@ -26,14 +26,11 @@ Wang123.net @endsection
 @endsection
 
 @section('content')
-
-
-<ol class="breadcrumb">
-  <li><a href="/">首页</a></li>
-  <li><a href="/article/all" class="active">文章列表</a></li>
-</ol>
-
-    <div class="">
+ 
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
         @if ($listData['data'])
             @foreach ($listData['data'] as $rows)
                 <div title="{{ $rows['title'] }}">
@@ -44,6 +41,8 @@ Wang123.net @endsection
                 </div>
             @endforeach
         @endif
+        </div>
+
     </div>
  
     <!-- 显示分页 -->

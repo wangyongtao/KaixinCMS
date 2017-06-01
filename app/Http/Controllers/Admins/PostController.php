@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Watercart\Admins\Posts as PostModel;
 use Watercart\Admins\Categories as CategoryModel;
 use App\Http\Controllers\Admins\AdminController;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends AdminController
 {
@@ -13,9 +14,10 @@ class PostController extends AdminController
      * 列表
      * @return string
      */
-    public function index(Request $request, $category = '')
+    public function index(Request $request)
     {
         $page = $request->input('page', 0);
+        $category = $request->input('category', '');
         $data = [];
         $where = [];
         if ($category) {
@@ -51,15 +53,17 @@ class PostController extends AdminController
                 'time' => time(),
             ];
             $input = [];
-            $input['type']     = 101;
+            $input['platform'] = 'posts';
             $input['category'] = $request->input('category');
 
             $input['title']    = $request->input('title');
-            $input['source']   = $request->input('source');
+            $input['source_name']   = $request->input('source_name', '网络');
+            $input['source_link']   = $request->input('source_link');
             $input['content']  = $request->input('content');
-            $input['update_time'] = time();
+            $input['created_at']  = date('Y-m-d H:i:s');
+            // $input['updated_at']  = date('Y-m-d H:i:s');
 
-            $result = DB::table('posts')->insertGetId($input);
+            $result = (new PostModel())->add(collect($input));
 
             if ($result) {
                 $response['code'] = 1;
@@ -87,19 +91,22 @@ class PostController extends AdminController
                 'time' => time(),
             ];
             $input = [];
-            $input['type']     = 101;
+            $input['platform'] = 'posts';
             $input['category'] = $request->input('category');
+
             $input['title']    = $request->input('title');
-            $input['source']   = $request->input('source');
+            $input['source_name']   = $request->input('source_name', '网络');
+            $input['source_link']   = $request->input('source_link');
             $input['content']  = $request->input('content');
-            $input['status']   = 1;
-            $input['update_time'] = time();
+            // $input['created_at']  = date('Y-m-d H:i:s');
+            $input['updated_at']  = date('Y-m-d H:i:s');
+
 
 
             $where = [
                 'id' => $id,
             ];
-            $result = DB::table('posts')
+            $result = DB::table('ks_posts')
                 ->where($where)
                 ->update($input);
             if ($result) {

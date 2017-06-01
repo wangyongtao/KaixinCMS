@@ -1,0 +1,58 @@
+/*********  default.css  ********/
+/*!
+ * IE10 viewport hack for Surface/desktop Windows 8 bug
+ * Copyright 2014-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+/*
+ * See the Getting Started docs for more information:
+ * http://getbootstrap.com/getting-started/#support-ie10-width
+ */
+@-ms-viewport     { width: device-width; }
+@-o-viewport      { width: device-width; }
+@viewport         { width: device-width; }
+
+/*---- header ----*/
+.page-header {
+
+}
+
+
+/*---- footer ----*/
+.page-footer {
+    width: 100%;
+    background:#eee;
+    padding-bottom: 30px;
+}
+
+.bs-glyphicons {
+    margin: 0 -10px 20px;
+    overflow: hidden;
+}
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.bs-glyphicons-list {
+    padding-left: 0;
+    list-style: none;
+}
+.bs-glyphicons-list li {
+    float: left;
+    width: 25%;
+    height: 35px;
+    padding: 10px;
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #fff;
+}

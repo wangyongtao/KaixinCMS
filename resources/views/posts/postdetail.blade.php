@@ -29,7 +29,7 @@ Wang123.net @endsection
 	      </div>
 	      <div class="panel-body">
 	          	
-	          	{{ $detailData['content'] }}
+	          	{!! $detailData['content'] !!}
 
 	      </div>
     </div>
