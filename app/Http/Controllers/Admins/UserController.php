@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use Watercart\Admins\Users as UserModel;
+use Watercart\Admins\UserModel;
 use Watercart\Admins\Categories as CategoryModel;
 
 class UserController extends AdminController
@@ -33,7 +33,7 @@ class UserController extends AdminController
  
         $data['listData'] = $result;
 
-        return view('admins.user.list', $data);
+        return view('admins.users.list', $data);
     }
 
 
