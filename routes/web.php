@@ -21,20 +21,15 @@ Auth::routes();
 Route::get('/', 'PostsController@index')->name('index');
 Route::get('/home', 'PostsController@index')->name('home');
  
-Route::group(['prefix' => 'posts'], function (){
-    Route::get('/', 'PostsController@showList');
-    Route::get('/category/{$categoryName}', 'PostsController@showCategory');
-    Route::get('/detail-{id}.html', 'PostsController@showDetail');
-
-});
 // posts
 Route::group(['prefix' => 'posts'], function (){
     Route::get('/', 'PostsController@showList');
-    Route::get('/category/{$categoryName}', 'PostsController@showCategory');
+    Route::get('/category-{categoryName}', 'PostsController@getListByCategoryName');
     Route::get('/detail-{id}.html', 'PostsController@showDetail');
 
 });
-// posts
+
+// admins
 Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
     Route::get('/posts', 'Admins\PostController@index')->name('admin-posts');

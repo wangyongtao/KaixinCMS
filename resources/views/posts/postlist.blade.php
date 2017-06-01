@@ -14,7 +14,7 @@ Wang123.net @endsection
 
     <ul class="list-group">
     @foreach ($categoryList as $rows)
-        <a href="/article/category-{{ $rows['category_name_en'] }}">
+        <a href="/posts/category-{{ $rows['category_name_en'] }}">
             <li class="list-group-item">
                 <strong> {{ $rows['category_name'] }} </strong>
                 <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span>

@@ -13,6 +13,11 @@ class PostsController extends Controller
         return $this->showList($request);
     }
     
+    public function getListByCategoryName(Request $request, $categoryName = '')
+    {
+        return $this->showList($request, $categoryName);
+    }
+    
     /**
      * 详情
      * @return \Illuminate\View\View
