@@ -39,22 +39,22 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if ( Request::is('admins/posts') )
+                    @if ( Request::is('admins/posts*') )
                         <li class="active"><a href="{{ route('admin-posts') }}">文章</a></li>
                     @else
                         <li class=""><a href="{{ route('admin-posts') }}">文章</a></li>
                     @endif
-                    @if ( Request::is('admins/categories') )
+                    @if ( Request::is('admins/categories*') )
                         <li class="active"><a href="{{ route('admin-category') }}">分类</a></li>
                     @else
                         <li class=""><a href="{{ route('admin-category') }}">分类</a></li>
                     @endif                        
-                    @if ( Request::is('admins/links') )
+                    @if ( Request::is('admins/links*') )
                         <li class="active"><a href="{{ route('admin-links') }}">链接</a></li>
                     @else
                         <li class=""><a href="{{ route('admin-links') }}">链接</a></li>
                     @endif
-                    @if ( Request::is('admins/users') )
+                    @if ( Request::is('admins/users*') )
                         <li class="active"><a href="{{ route('admin-users') }}">用户</a></li>
                     @else
                         <li class=""><a href="{{ route('admin-users') }}">用户</a></li>

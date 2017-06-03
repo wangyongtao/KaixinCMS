@@ -1,0 +1,56 @@
+# category.form.edit.yaml
+title: 分类管理
+model: CategoryModel
+
+show_fields:
+
+edit_fields:
+
+    category_id: 
+        title: 分类ID
+        element: input-text
+        type: text
+        id: category_id
+        name: category_id
+        className: form-control
+        placeholder: '分类ID'
+    platform:
+        title: 平台
+        element: input-text
+        type: text
+        id: platform
+        name: platform
+        className: form-control
+        placeholder: '平台'
+    parent_id: 
+        title: 父级分类
+        element: select
+        type: t
+        id: parent_id
+        name: parent_id
+        className: form-control
+        placeholder: '父级分类ID'
+    category_name:
+        title: 中文名
+        element: input-text
+        type: text
+        id: category_name
+        name: category_name
+        className: form-control
+        placeholder: '分类中文名'
+    category_name_en:
+        title: 英文名
+        element: input-text
+        type: text
+        id: category_name_en
+        name: category_name_en
+        className: form-control
+        placeholder: '分类英文名'
+    notes:
+        title: 备注
+        element: textarea
+        type: textarea
+        id: notes
+        name: notes
+        className: form-control
+        placeholder: '备注'

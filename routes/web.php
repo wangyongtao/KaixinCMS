@@ -20,7 +20,12 @@ Auth::routes();
 
 Route::get('/', 'PostsController@index')->name('index');
 Route::get('/home', 'PostsController@index')->name('home');
- 
+
+// SiteMap (html)
+Route::get('sitemap.html', 'SitemapController@showHtml');
+// SiteMap (xml)
+Route::get('sitemap.xml', 'SitemapController@showXml');
+
 // posts
 Route::group(['prefix' => 'posts'], function (){
     Route::get('/', 'PostsController@showList');
@@ -39,6 +44,8 @@ Route::group(['prefix' => 'admins'], function (){
     Route::post('/posts/edit/{id}', 'Admins\PostController@edit');
 
     Route::get('/categories', 'Admins\CategoryController@index')->name('admin-category');
+    Route::match(['get', 'post'], '/categories/add', 'Admins\CategoryController@add');
+    Route::match(['get', 'post'], '/categories/edit/{id}', 'Admins\CategoryController@edit');
     Route::get('/links', 'Admins\LinkController@index')->name('admin-links');
     Route::get('/users', 'Admins\UserController@index')->name('admin-users');
 });

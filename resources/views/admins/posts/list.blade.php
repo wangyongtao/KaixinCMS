@@ -58,7 +58,10 @@
                 <tr>
                   <th scope="row">{{ $rows['id'] }}</th>
                   <td><a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['title'] }} </a> </td>
-                  <td>{{ $rows['updated_at'] ?: '--' }}</td>
+                  <td>
+                    <small> {{ $rows['created_at'] ?: '--' }} </small> <br/>
+                    <small> {{ $rows['updated_at'] ?: '--' }} </small> 
+                  </td>
                   <td>
                   <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
                   </td>
