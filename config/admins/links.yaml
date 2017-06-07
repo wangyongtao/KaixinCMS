@@ -1,0 +1,32 @@
+# category.form.edit.yaml
+title: 链接管理
+model: CategoryModel
+
+show_fields:
+
+edit_fields:
+ 
+    link_name:
+        title: 中文名
+        element: input-text
+        type: text
+        id: link_name
+        name: link_name
+        className: form-control
+        placeholder: '中文名'
+    link_name_en:
+        title: 英文名
+        element: input-text
+        type: text
+        id: link_name_en
+        name: link_name_en
+        className: form-control
+        placeholder: '英文名'
+    notes:
+        title: 备注
+        element: textarea
+        type: textarea
+        id: notes
+        name: notes
+        className: form-control
+        placeholder: '备注'

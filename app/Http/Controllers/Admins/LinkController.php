@@ -65,7 +65,7 @@ class LinkController extends AdminController
             $input['created_at']  = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
-            $result = (new PostModel())->add(collect($input));
+            $result = (new LinkModel())->add(collect($input));
 
             if ($result) {
                 $response['code'] = 1;
@@ -98,7 +98,7 @@ class LinkController extends AdminController
 
             $input['title']    = $request->input('title');
             $input['source_name']   = $request->input('source_name', '网络');
-            $input['source_link']   = $request->input('source_link');
+            $input['link_url']   = $request->input('link_url');
             $input['content']  = $request->input('content');
             // $input['created_at']  = date('Y-m-d H:i:s');
             $input['updated_at']  = date('Y-m-d H:i:s');
@@ -118,18 +118,24 @@ class LinkController extends AdminController
             return response($response, 200);
         }
 
-        $result = (new PostModel())->find($id);
+        $result = (new LinkModel())->find($id);
         if (empty($result)) {
             return "没有获取到数据.请确认URL是否正确.";
         }
 
         $data['categoryList'] = (new CategoryModel())->getList();
+        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
 
         $result = $result->toArray();
         $data['detail'] = $result;
+        $data['options'] = array();
+        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
+            // print_r($item);
+            return [$item['category_id'] => $item['category_name']];
+        });
+        
 
-
-        return view('admins.posts.edit', $data);
+        return view('admins.links.edit', $data);
     }
 
 }

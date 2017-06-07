@@ -47,5 +47,8 @@ Route::group(['prefix' => 'admins'], function (){
     Route::match(['get', 'post'], '/categories/add', 'Admins\CategoryController@add');
     Route::match(['get', 'post'], '/categories/edit/{id}', 'Admins\CategoryController@edit');
     Route::get('/links', 'Admins\LinkController@index')->name('admin-links');
+    Route::match(['get', 'post'], '/links/add', 'Admins\LinkController@add');
+    Route::match(['get', 'post'], '/links/edit/{id}', 'Admins\LinkController@edit');
+
     Route::get('/users', 'Admins\UserController@index')->name('admin-users');
 });

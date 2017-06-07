@@ -28,10 +28,10 @@
 
                         <tr>
                           <th scope="row">{{ $rows['id'] }}</th>
-                          <td><a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['link_name'] }} </a> </td>
+                          <td><a href="/links/detail-{{ $rows['id'] }}.html"> {{ $rows['link_name'] }} </a> </td>
                           <td>{{ $rows['updated_at'] ?: '--' }}</td>
                           <td>
-                          <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
+                          <a href="/admins/links/edit/{{ $rows['id'] }}">Edit</a>
                           </td>
                         </tr>
          
