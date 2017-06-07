@@ -39,12 +39,19 @@ function form_group(){
 }
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
-function formBuilder($item = '', $options = []){
+
+
+function formBuilder($type = '', $item = '', $options = []){
 	$html = '        <form id="myForm" accept-charset="UTF-8" class="simple_form form-horizontal" method="post" novalidate="novalidate"><input type="hidden" name="_submit" value="1" />';
 	$html .= csrf_field();
 
 	try {
-	    $content = Yaml::parse(file_get_contents(config_path('admins/category.yaml')));
+		if ($type == 'category'){
+	    	$content = Yaml::parse(file_get_contents(config_path('admins/category.yaml')));
+
+		} elseif ($type == 'links' ) {
+	    	$content = Yaml::parse(file_get_contents(config_path('admins/links.yaml')));
+		}
 	    // print_r($content);
 	} catch (ParseException $e) {
 	    printf("Unable to parse the YAML string: %s", $e->getMessage());

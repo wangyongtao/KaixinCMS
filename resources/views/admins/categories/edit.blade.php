@@ -36,7 +36,7 @@
         </div>
         <div class="panel-body">
          
-        	<?php echo formBuilder($detail, $options)?>
+        	<?php echo formBuilder('category', $detail, $options)?>
 
         </div>
     </div>

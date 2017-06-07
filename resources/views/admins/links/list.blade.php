@@ -12,6 +12,8 @@
     <div class="panel panel-default">
         <div class="panel-heading">
         链接列表
+                              <a href="/admins/links/add" class="btn btn-xs btn-success">新增</a>
+
         </div>
       <div class="panel-body">
         

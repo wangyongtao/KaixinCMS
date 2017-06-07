@@ -47,7 +47,7 @@ class LinkController extends AdminController
     public function add(Request $request)
     {
 
-        if ( $request->input('title') !== null ) {
+        if ( $request->input('_submit') !== null ) {
             $response = [
                 'code' => 0,
                 'msg'  => '',
@@ -56,14 +56,16 @@ class LinkController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['category'] = $request->input('category');
+            $input['module'] = $request->input('module', 'links');
 
-            $input['title']    = $request->input('title');
-            $input['source_name']   = $request->input('source_name', '网络');
-            $input['source_link']   = $request->input('source_link');
-            $input['content']  = $request->input('content');
-            $input['created_at']  = date('Y-m-d H:i:s');
-            // $input['updated_at']  = date('Y-m-d H:i:s');
+            $input['link_name']   = $request->input('link_name', '');
+            $input['link_name_en']   = $request->input('link_name_en', '');
+            $input['link_url']   = $request->input('link_url');
+            $input['notes']   = $request->input('notes');
+            // $input['created_at']  = date('Y-m-d H:i:s');
+            $input['updated_at']  = date('Y-m-d H:i:s');
+
+
 
             $result = (new LinkModel())->add(collect($input));
 
@@ -76,8 +78,15 @@ class LinkController extends AdminController
 
         }
         $data['categoryList'] = (new CategoryModel())->getList();
+        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
+ 
+        $data['options'] = array();
+        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
+            // print_r($item);
+            return [$item['category_id'] => $item['category_name']];
+        });
 
-        return view('admins.posts.add', $data);
+        return view('admins.links.add', $data);
     }
 
         /**
@@ -85,7 +94,7 @@ class LinkController extends AdminController
      */
     public function edit(Request $request, $id=0)
     {
-        if ( $request->input('title') !== null ) {
+        if ( $request->input('_submit') !== null ) {
             $response = [
                 'code' => 0,
                 'msg'  => '',
@@ -94,12 +103,12 @@ class LinkController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['category'] = $request->input('category');
+            $input['module'] = $request->input('module', 'links');
 
-            $input['title']    = $request->input('title');
-            $input['source_name']   = $request->input('source_name', '网络');
+            $input['link_name']   = $request->input('link_name', '');
+            $input['link_name_en']   = $request->input('link_name_en', '');
             $input['link_url']   = $request->input('link_url');
-            $input['content']  = $request->input('content');
+            $input['notes']   = $request->input('notes');
             // $input['created_at']  = date('Y-m-d H:i:s');
             $input['updated_at']  = date('Y-m-d H:i:s');
 
@@ -108,7 +117,7 @@ class LinkController extends AdminController
             $where = [
                 'id' => $id,
             ];
-            $result = DB::table('ks_posts')
+            $result = DB::table('ks_links')
                 ->where($where)
                 ->update($input);
             if ($result) {

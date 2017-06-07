@@ -22,6 +22,14 @@ edit_fields:
         name: link_name_en
         className: form-control
         placeholder: '英文名'
+    link_url:
+        title: 链接地址
+        element: input-text
+        type: text
+        id: link_url
+        name: link_url
+        className: form-control
+        placeholder: '链接地址'
     notes:
         title: 备注
         element: textarea

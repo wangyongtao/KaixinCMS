@@ -13,8 +13,8 @@
 
 <ol class="breadcrumb">
   <li><a href="/">首页</a></li>
-  <li><a href="/admins/links">分类</a></li>
-  <li><a href="#" class="active">编辑</a></li>
+  <li><a href="/admins/links">链接</a></li>
+  <li><a href="#" class="active">新增</a></li>
 </ol>
 
 <!-- umeditor
@@ -30,13 +30,13 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">编辑 (<?php if(isset($detail['id'])){echo $detail['id'];}?>)</h3>
+            <h3 class="panel-title">新增 </h3>
                       <a href="/admins/links/add" class="btn btn-xs btn-success">新增</a>
 
         </div>
         <div class="panel-body">
          
-        	<?php echo formBuilder('links', $detail, $options)?>
+        	<?php echo formBuilder('links', '', $options)?>
 
         </div>
     </div>
@@ -46,7 +46,7 @@
 ==========================================================-->
 <script type="text/javascript">
  
-var requestUrl = '/admins/links/edit/{{$detail['id']}}';
+var requestUrl = '/admins/links/add';
 // Specify a function to execute when the DOM is fully loaded.
 $( document ).ready(function() {
 
@@ -86,7 +86,7 @@ $( document ).ready(function() {
                 //window.location.reload();
 
                 if( result.code == 1 ){            
-                    window.location.href = result.data;
+                    window.location.href = '/admins/links/edit/' + result.data;
                 } else {
                     alert(result.msg);
                     window.location.reload();
