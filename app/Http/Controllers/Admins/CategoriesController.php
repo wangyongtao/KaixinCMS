@@ -10,7 +10,7 @@ use App\Http\Controllers\Admins\AdminController;
 // use Symfony\Component\Yaml\Exception\ParseException;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends AdminController
+class CategoriesController extends AdminController
 {
     /**
      * 列表

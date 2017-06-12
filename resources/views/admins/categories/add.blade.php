@@ -28,8 +28,8 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">新增分类</h3>
-                      <a href="/admins/categories/add" class="btn btn-xs btn-success">新增分类</a>
+            <strong class="panel-title">新增分类</strong>
+            <a href="/admins/categories/add" class="btn btn-xs btn-success">新增分类</a>
 
         </div>
         <div class="panel-body">

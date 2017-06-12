@@ -1,6 +1,6 @@
 {{--  --}}
 
-@extends('layouts.posts')
+@extends('default.layouts.posts')
 
 {{-- META标题、关键词、描述等 --}}
 @section('title')

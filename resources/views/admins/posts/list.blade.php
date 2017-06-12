@@ -1,5 +1,3 @@
-{{--  --}}
-
 @extends('admins.layouts.home')
  
 

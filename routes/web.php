@@ -29,7 +29,7 @@ Route::get('sitemap.xml', 'SitemapController@showXml');
 // posts
 Route::group(['prefix' => 'posts'], function (){
     Route::get('/', 'PostsController@showList');
-    Route::get('/category-{categoryName}', 'PostsController@getListByCategoryName');
+    Route::get('/category-{categoryName}', 'PostsController@showList');
     Route::get('/detail-{id}.html', 'PostsController@showDetail');
 
 });
@@ -37,18 +37,29 @@ Route::group(['prefix' => 'posts'], function (){
 // admins
 Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
-    Route::get('/posts', 'Admins\PostController@index')->name('admin-posts');
-    Route::get('/posts/add', 'Admins\PostController@add');
-    Route::get('/posts/edit/{id}', 'Admins\PostController@edit');
-    Route::post('/posts/add', 'Admins\PostController@add');
-    Route::post('/posts/edit/{id}', 'Admins\PostController@edit');
+    Route::get('/posts', 'Admins\PostsController@index')->name('admin-posts');
+    Route::get('/posts/add', 'Admins\PostsController@add');
+    Route::get('/posts/edit/{id}', 'Admins\PostsController@edit');
+    Route::post('/posts/add', 'Admins\PostsController@add');
+    Route::post('/posts/edit/{id}', 'Admins\PostsController@edit');
 
     Route::get('/categories', 'Admins\CategoryController@index')->name('admin-category');
     Route::match(['get', 'post'], '/categories/add', 'Admins\CategoryController@add');
     Route::match(['get', 'post'], '/categories/edit/{id}', 'Admins\CategoryController@edit');
-    Route::get('/links', 'Admins\LinkController@index')->name('admin-links');
-    Route::match(['get', 'post'], '/links/add', 'Admins\LinkController@add');
-    Route::match(['get', 'post'], '/links/edit/{id}', 'Admins\LinkController@edit');
+    // links
+    Route::get('/links', 'Admins\LinksController@index')->name('admin-links');
+    Route::match(['get', 'post'], '/links/add', 'Admins\LinksController@add');
+    Route::match(['get', 'post'], '/links/edit/{id}', 'Admins\LinksController@edit');
+    // settings
+    Route::get('/settings', 'Admins\SettingsController@index')->name('admin-settings');
+    // users
+    Route::get('/users', 'Admins\UsersController@index')->name('admin-users');
 
-    Route::get('/users', 'Admins\UserController@index')->name('admin-users');
+    // 待开发
+    Route::get('/goods', 'Admins\UserController@index')->name('admin-goods');
+    Route::get('/orders', 'Admins\UserController@index')->name('admin-orders');
+    Route::get('/promotion', 'Admins\UserController@index')->name('admin-promotion');
+    Route::get('/advisory', 'Admins\UserController@index')->name('admin-advisory');
+    Route::get('/feedback', 'Admins\UserController@index')->name('admin-feedback');
 });
+ 

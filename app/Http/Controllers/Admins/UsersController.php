@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
+
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
+use Watercart\Admins\UserModel;
+use Watercart\Admins\Categories as CategoryModel;
 
-class PostController extends AdminController
+class UsersController extends AdminController
 {
     /**
      * 列表
@@ -24,18 +25,15 @@ class PostController extends AdminController
             $where['category'] = $category;
         }
 
-        $result = (new PostModel())->getListWithPaginate($where, $page);
+        $result = (new UserModel())->getListWithPaginate($where, $page);
         if (empty($result)) {
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
-        // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
-// print_r($data);exit;
-
+ 
         $data['listData'] = $result;
 
-        return view('admins.posts.list', $data);
+        return view('admins.users.list', $data);
     }
 
 

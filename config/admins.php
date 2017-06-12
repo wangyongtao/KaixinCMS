@@ -13,6 +13,17 @@ return [
         'todolist'   => 'todolist',
         'user_login_logs' => 'user_login_logs',
         'operation_logs'  => 'operation_logs',
+        'settings'   => 'settings',
+        'pages'      => 'pages',
+        'tags'          => 'tags',
+        'tag_relations' => 'tag_relations',
+    ],
+    // 平台
+    'platform' => [
+        'cms'   => '内容平台',
+        'joke'  => '笑话平台',
+        'blog'  => '博客平台',
+        'shop'  => '商城平台',
     ],
 
 

@@ -1,6 +1,10 @@
 # category.form.edit.yaml
 title: 分类管理
 model: CategoryModel
+# AJAX添加提交地址
+ajax_add_url: /admins/categories/add
+# AJX编辑提交地址
+ajax_edit_url: /admins/categories/edit
 
 show_fields:
 

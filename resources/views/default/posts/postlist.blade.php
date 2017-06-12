@@ -1,6 +1,4 @@
-{{--  --}}
-
-@extends('layouts.posts')
+@extends('default.layouts.posts')
 
 {{-- META标题、关键词、描述等 --}}
 @section('title')
@@ -17,7 +15,7 @@ Wang123.net @endsection
         <a href="/posts/category-{{ $rows['category_name_en'] }}">
             <li class="list-group-item">
                 <strong> {{ $rows['category_name'] }} </strong>
-                <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span>
+                <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['category_name_en']] : '' }}</span>
             </li>
         </a>
     @endforeach

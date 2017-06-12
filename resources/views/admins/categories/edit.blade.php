@@ -30,9 +30,8 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">编辑 (<?php if(isset($detail['category_id'])){echo $detail['category_id'];}?>)</h3>
-                      <a href="/admins/categories/add" class="btn btn-xs btn-success">新增分类</a>
-
+            <span class="panel-title">编辑 (<?php if(isset($detail['category_id'])){echo $detail['category_id'];}?>) </span> 
+            <a href="/admins/categories/add" class="btn btn-xs btn-success">新增分类</a>
         </div>
         <div class="panel-body">
          

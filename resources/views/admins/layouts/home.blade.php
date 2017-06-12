@@ -31,7 +31,7 @@
 
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/admins/dashboard') }}">
                     管理后台
                 </a>
             </div>
@@ -39,6 +39,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+
                     @if ( Request::is('admins/posts*') )
                         <li class="active"><a href="{{ route('admin-posts') }}">文章</a></li>
                     @else
@@ -58,7 +59,43 @@
                         <li class="active"><a href="{{ route('admin-users') }}">用户</a></li>
                     @else
                         <li class=""><a href="{{ route('admin-users') }}">用户</a></li>
-                    @endif   
+                    @endif
+<!-- 
+                    @if ( Request::is('admins/goods*') )
+                        <li class="active"><a href="{{ route('admin-goods') }}">商品</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-goods') }}">商品</a></li>
+                    @endif
+
+                    @if ( Request::is('admins/orders*') )
+                        <li class="active"><a href="{{ route('admin-orders') }}">订单</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-orders') }}">订单</a></li>
+                    @endif
+
+                    @if ( Request::is('admins/promotion*') )
+                        <li class="active"><a href="{{ route('admin-promotion') }}">促销</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-promotion') }}">促销</a></li>
+                    @endif
+
+                    @if ( Request::is('admins/advisory*') )
+                        <li class="active"><a href="{{ route('admin-advisory') }}">咨询</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-advisory') }}">咨询</a></li>
+                    @endif -->
+
+                    @if ( Request::is('admins/feedback*') )
+                        <li class="active"><a href="{{ route('admin-orders') }}">反馈</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-orders') }}">反馈</a></li>
+                    @endif
+
+                    @if ( Request::is('admins/settings*') )
+                        <li class="active"><a href="{{ route('admin-settings') }}">设置</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-settings') }}">设置</a></li>
+                    @endif
                     </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -118,7 +155,7 @@
         </div>
     </div>
 
-    @include('layouts.footer')
+    @include('admins.layouts.footer')
 
     <!-- Scripts -->
 

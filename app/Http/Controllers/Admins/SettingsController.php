@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use Watercart\Admins\LinkModel;
+use Watercart\Admins\SettingModel;
 use Watercart\Admins\Categories as CategoryModel;
 
-class LinkController extends AdminController
+class SettingsController extends AdminController
 {
     /**
      * 列表
@@ -25,19 +25,15 @@ class LinkController extends AdminController
             $where['category'] = $category;
         }
 
-        $result = (new LinkModel())->getListWithPaginate($where, $page);
-        // print_r($result);
+        $result = SettingModel::where('status', 1)->get();
         if (empty($result)) {
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
-        // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
-// print_r($data);exit;
-
+ 
         $data['listData'] = $result;
 
-        return view('admins.links.list', $data);
+        return view('admins.settings.list', $data);
     }
 
 
@@ -47,7 +43,7 @@ class LinkController extends AdminController
     public function add(Request $request)
     {
 
-        if ( $request->input('_submit') !== null ) {
+        if ( $request->input('title') !== null ) {
             $response = [
                 'code' => 0,
                 'msg'  => '',
@@ -56,18 +52,16 @@ class LinkController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['module'] = $request->input('module', 'links');
+            $input['category'] = $request->input('category');
 
-            $input['link_name']   = $request->input('link_name', '');
-            $input['link_name_en']   = $request->input('link_name_en', '');
-            $input['link_url']   = $request->input('link_url');
-            $input['notes']   = $request->input('notes');
-            // $input['created_at']  = date('Y-m-d H:i:s');
-            $input['updated_at']  = date('Y-m-d H:i:s');
+            $input['title']    = $request->input('title');
+            $input['source_name']   = $request->input('source_name', '网络');
+            $input['source_link']   = $request->input('source_link');
+            $input['content']  = $request->input('content');
+            $input['created_at']  = date('Y-m-d H:i:s');
+            // $input['updated_at']  = date('Y-m-d H:i:s');
 
-
-
-            $result = (new LinkModel())->add(collect($input));
+            $result = (new PostModel())->add(collect($input));
 
             if ($result) {
                 $response['code'] = 1;
@@ -78,15 +72,8 @@ class LinkController extends AdminController
 
         }
         $data['categoryList'] = (new CategoryModel())->getList();
-        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
- 
-        $data['options'] = array();
-        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
-            // print_r($item);
-            return [$item['category_id'] => $item['category_name']];
-        });
 
-        return view('admins.links.add', $data);
+        return view('admins.posts.add', $data);
     }
 
         /**
@@ -94,7 +81,7 @@ class LinkController extends AdminController
      */
     public function edit(Request $request, $id=0)
     {
-        if ( $request->input('_submit') !== null ) {
+        if ( $request->input('title') !== null ) {
             $response = [
                 'code' => 0,
                 'msg'  => '',
@@ -103,12 +90,12 @@ class LinkController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['module'] = $request->input('module', 'links');
+            $input['category'] = $request->input('category');
 
-            $input['link_name']   = $request->input('link_name', '');
-            $input['link_name_en']   = $request->input('link_name_en', '');
-            $input['link_url']   = $request->input('link_url');
-            $input['notes']   = $request->input('notes');
+            $input['title']    = $request->input('title');
+            $input['source_name']   = $request->input('source_name', '网络');
+            $input['source_link']   = $request->input('source_link');
+            $input['content']  = $request->input('content');
             // $input['created_at']  = date('Y-m-d H:i:s');
             $input['updated_at']  = date('Y-m-d H:i:s');
 
@@ -117,7 +104,7 @@ class LinkController extends AdminController
             $where = [
                 'id' => $id,
             ];
-            $result = DB::table('ks_links')
+            $result = DB::table('ks_posts')
                 ->where($where)
                 ->update($input);
             if ($result) {
@@ -127,24 +114,18 @@ class LinkController extends AdminController
             return response($response, 200);
         }
 
-        $result = (new LinkModel())->find($id);
+        $result = (new PostModel())->find($id);
         if (empty($result)) {
             return "没有获取到数据.请确认URL是否正确.";
         }
 
         $data['categoryList'] = (new CategoryModel())->getList();
-        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
 
         $result = $result->toArray();
         $data['detail'] = $result;
-        $data['options'] = array();
-        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
-            // print_r($item);
-            return [$item['category_id'] => $item['category_name']];
-        });
-        
 
-        return view('admins.links.edit', $data);
+
+        return view('admins.posts.edit', $data);
     }
 
 }

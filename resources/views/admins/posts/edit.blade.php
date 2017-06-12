@@ -1,5 +1,3 @@
-{{-- 文章编辑页面 --}}
-
 @extends('admins.layouts.home')
 
 @section('sidebar')
@@ -39,7 +37,8 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">文章编辑 (<?php if(isset($detail['id'])){echo $detail['id'];}?>)</h3>
+            <span class="panel-title">文章编辑 (<?php if(isset($detail['id'])){echo $detail['id'];}?>)</span>
+            <a href="/admins/posts/add" class="btn btn-xs btn-success">  新增文章 </a>
         </div>
         <div class="panel-body">
         <form id="myForm" accept-charset="UTF-8" class="simple_form form-horizontal" method="post" novalidate="novalidate">
@@ -47,27 +46,27 @@
             <input type="hidden" name="form_action" value="">
             <input type="hidden" name="id" value="<?php if(isset($detail['id'])){echo $detail['id'];}?>">
             <div class="form-group">
-                <label class="col-md-3 control-label" for="title">文章编号</label>
-                <div class="col-md-8">
+                <label class="col-md-2 control-label" for="title">文章编号</label>
+                <div class="col-md-10">
                     <input  class="form-control" type="text" disabled="disabled" value="<?php if(isset($detail['id'])){echo $detail['id'];}?>" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label" for="title">文章标题</label>
-                <div class="col-md-8">
+                <label class="col-md-2 control-label" for="title">文章标题</label>
+                <div class="col-md-10">
                     <input placeholder="网站名称" class="form-control" id="title" name="title" size="50" type="text" value="<?php if(isset($detail['title'])){echo $detail['title'];}?>" />
                 </div>
             </div>
  
             <div class="form-group">
-                <label class="col-md-3 control-label" for="source_link">来源链接</label>
-                <div class="col-md-8">
+                <label class="col-md-2 control-label" for="source_link">来源链接</label>
+                <div class="col-md-10">
                     <input placeholder="网站链接" class="form-control" id="source_link" name="source_link" size="50" type="text" value="<?php if(isset($detail['source_link'])){echo $detail['source_link'];}?>" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label" for="link_url">文章分类</label>
-                <div class="col-md-8">
+                <label class="col-md-2 control-label" for="link_url">文章分类</label>
+                <div class="col-md-10">
                     <select class="form-control" id="category" name="category">
                         @foreach ($categoryList as $rows)
                             <option value="{{ $rows['category_name_en'] }}" <?php if($detail['category']==$rows['category_name_en']){echo 'selected="selected"';}?>>
@@ -80,19 +79,21 @@
 
  
             <div class="form-group">
-                <label class="col-md-3 control-label" for="
+                <label class="col-md-2 control-label" for="
                 ">文章内容</label>
-                <div class="col-md-8">
+                <div class="col-md-10">
                     <textarea id="content" name="content" style="display: none;"> <?php if(isset($detail['content'])){echo $detail['content'];}?> </textarea>
+
+                    <!-- 加载编辑器的容器 -->
+                    <script type="text/plain" id="myEditor" style="width:100%;height:240px;">
+                        <div><?php if(isset($detail['content'])){echo $detail['content'];}?></div>
+                    </script>
                 </div>
-                <!-- 加载编辑器的容器 -->
-                <script type="text/plain" id="myEditor" style="width:800px;height:240px;">
-                    <div><?php if(isset($detail['content'])){echo $detail['content'];}?></div>
-                </script>
+                
             </div>
             <div class="form-group">
-                <label class="col-md-3 control-label" for="user_account_attributes_location">显示/隐藏</label>
-                <div class="col-md-8">
+                <label class="col-md-2 control-label" for="user_account_attributes_location">显示/隐藏</label>
+                <div class="col-md-10">
                     <label class='radio-inline'>
                         <input checked="checked" id="settings_show_community_stats_on" name="is_hidden" type="radio" value="0" />显示</label>
                     <label class='radio-inline'>

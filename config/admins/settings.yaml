@@ -1,0 +1,8 @@
+# category.form.edit.yaml
+title: 设置
+model: SettingModel
+
+show_fields:
+
+edit_fields:
+ 

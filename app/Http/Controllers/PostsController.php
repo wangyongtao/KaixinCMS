@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoriesModel;
+use Watercart\Admins\Categories as CategoryModel;
+use App\Http\Controllers\Admins\AdminController;
+use Illuminate\Support\Facades\DB;
 
-class PostsController extends Controller
+class PostsController extends AdminController
 {
-    public function index(Request $request, $id = 0)
-    {
-        return $this->showList($request);
-    }
-    
-    public function getListByCategoryName(Request $request, $categoryName = '')
-    {
-        return $this->showList($request, $categoryName);
-    }
-    
     /**
-     * 详情
+     * 列表
+     * @return string
+     */
+    public function index(Request $request)
+    {
+        return $this->showList($result);
+    }
+ 
+    /**
+     * 关于我们
      * @return \Illuminate\View\View
      */
     public function showDetail(Request $request, $id = 0)
@@ -29,19 +30,19 @@ class PostsController extends Controller
 
 
         $result = (new PostModel())->find($id);
-        if ($result) {
-                $result = $result->toArray();
-
-                $data['seo'] = [
-                    'title'       => $result['title'],
-                    'keywords'    =>  "关键词",
-                    'description' => '',
-                ];
-                
+        if (empty($result)) {
+            return "没有获取到数据.请确认URL是否正确.";
         }
+        $result = $result->toArray();
+
+        $data['seo'] = [
+            'title'       => $result['title'],
+            'keywords'    =>  "关键词",
+            'description' => '',
+        ];
         $data['detailData'] = $result;
 
-        return view('posts.postdetail', $data);
+        return view('default.posts.postdetail', $data);
     }
 
     /**
@@ -51,6 +52,7 @@ class PostsController extends Controller
     public function showList(Request $request, $category = '')
     {
         $page = $request->input('page', 0);
+        $category = $request->input('category', '');
         $data = [];
         $where = [];
         if ($category) {
@@ -62,12 +64,17 @@ class PostsController extends Controller
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoriesModel())->getList();
-        // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
-// print_r($data);exit;
+        $data['categoryList'] = (new CategoryModel())->getListByPlatform();
+
+        $data['categoryCount'] = (new PostModel())->getListCountGroupByCategory();
 
         $data['listData'] = $result;
-
-        return view('posts.postlist', $data);
+// print_r($data);exit;
+        return view('default.posts.postlist', $data);
     }
+
+    public function getListByCategoryName(){
+        
+    }
+
 }

@@ -28,7 +28,7 @@
 
   <div class="panel panel-default">
       <div class="panel-heading">
-          分类管理
+          <strong> 分类管理 </strong>
           <a href="/admins/categories/add" class="btn btn-xs btn-success">新增分类</a>
       </div>
       <div class="panel-body">
