@@ -70,11 +70,37 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8"> @yield('content') </div>
+                <div class="col-md-4">
+                    @section('sidebar')
+                        @include('default.layouts.sidebar')
+                    @show
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- 统计代码
+    =============================-->
+    @if (config('app.BAIDU_TONGJI'))
+        <script>
+            var _hmt = _hmt || [];
+            var _hmsrc = '{{ config("app.BAIDU_TONGJI") }}';
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = _hmsrc;
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        @else
+                <!-- 没有配置统计代码 -->
+    @endif
 </body>
 </html>

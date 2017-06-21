@@ -16,7 +16,7 @@ class PostsController extends AdminController
      */
     public function index(Request $request)
     {
-        return $this->showList($result);
+        return $this->showList($request);
     }
  
     /**

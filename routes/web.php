@@ -26,14 +26,6 @@ Route::get('sitemap.html', 'SitemapController@showHtml');
 // SiteMap (xml)
 Route::get('sitemap.xml', 'SitemapController@showXml');
 
-// posts
-Route::group(['prefix' => 'posts'], function (){
-    Route::get('/', 'PostsController@showList');
-    Route::get('/category-{categoryName}', 'PostsController@showList');
-    Route::get('/detail-{id}.html', 'PostsController@showDetail');
-
-});
-
 // admins
 Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
@@ -61,5 +53,36 @@ Route::group(['prefix' => 'admins'], function (){
     Route::get('/promotion', 'Admins\UserController@index')->name('admin-promotion');
     Route::get('/advisory', 'Admins\UserController@index')->name('admin-advisory');
     Route::get('/feedback', 'Admins\UserController@index')->name('admin-feedback');
+    Route::post('/feedback/add', 'Admins\UserController@index');
 });
- 
+
+// posts
+Route::group(['prefix' => 'posts'], function (){
+    Route::get('/', 'PostsController@showList');
+    Route::get('/category-{categoryName}', 'PostsController@showList');
+    Route::get('/detail-{id}.html', 'PostsController@showDetail');
+
+});
+
+Route::group(['prefix' => 'dict'], function (){
+    Route::get('/', 'DictController@showList');
+    Route::get('/roots.html', 'DictController@getList');
+    Route::get('/detail-{id}.html', 'DictController@showDetail');
+
+});
+
+// about us
+Route::group(['prefix' => 'about'], function (){
+    Route::get('/about.html', 'AboutController@about');
+    Route::get('/contact.html', 'AboutController@contact');
+    Route::get('/disclaimer.html', 'AboutController@disclaimer');
+    Route::get('/join.html', 'AboutController@join');
+    Route::get('/jobs.html', 'AboutController@jobs');
+    Route::get('/feedback.html', 'AboutController@feedback');
+    Route::post('/feedback/add.html', 'AboutController@feedbackAdd');
+});
+
+// helps
+Route::group(['help' => 'help'], function (){
+
+});
