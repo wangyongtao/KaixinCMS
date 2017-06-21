@@ -36,7 +36,10 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/posts">热门文章</a></li>
+                    <!-- <li><a href="/learn-english" title="英语学习">英语学习</a></li> -->
+                    <li><a href="/website" title="网址大全">网址大全</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -89,6 +92,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Page Bottom -->
+    <div class="page-bottom">@yield('pageBottom')</div>
     <!-- 统计代码
     =============================-->
     @if (config('app.BAIDU_TONGJI'))

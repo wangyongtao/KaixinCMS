@@ -31,7 +31,7 @@ class PostsController extends AdminController
 
         $result = (new PostModel())->find($id);
         if (empty($result)) {
-            return "没有获取到数据.请确认URL是否正确.";
+            return view('errors.404');
         }
         $result = $result->toArray();
 

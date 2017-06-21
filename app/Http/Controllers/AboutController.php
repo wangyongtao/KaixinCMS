@@ -54,37 +54,34 @@ class AboutController extends AdminController
             'description' => '',
         ];
 
-        return view('help.feedback', $data);
+        return view('default.about.feedback', $data);
     }
 
     public function feedbackCreate(Request $request)
     {
 
         if ( $request->input('isSubmit') !== null ) {
-            $agent = new UserAgent();
-            $input = collect([]);
+
+            $input = [];
             $input['type']     = 101;
             $input['uid']      = 0;
             $input['ip_address']    = $request->input('content');
             $input['content']       = $request->input('content');
             $input['contact_info']  = $request->input('contact_info');
-            $input['browser']    = $agent->browser();
-            $input['platform']  = $agent->platform();;
-            $input['device']    = $agent->device();
+            $input['browser']   = '';
+            $input['platform']  = '';
+            $input['device']    = '';
             $input['user_agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? ($_SERVER['HTTP_USER_AGENT']) : '';
             $input['created_at'] = date('Y-m-d H:i:s');
             $input['updated_at'] = date('Y-m-d H:i:s');
 
-            $table = (new FeedbackModel)->saveData(collect($input));
-            // $table = (new FeedbackModel)->table;
-            // $insertId = DB::table($table)->insertGetId($input);
+//            $table = (new FeedbackModel)->saveData(collect($input));
+            DB::table('ks_feedback')->insert($input);
 
-            // if ($insertId) {
-            //     $response['code'] = 200;
-            //     $response['data'] = $insertId;
-            // }
-
-            return $this->renderApiSuccess();
+            return response([
+                'code' => 200,
+                'msg'  => '',
+            ], 200);
 
         }
     }

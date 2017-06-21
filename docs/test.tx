@@ -1,0 +1,18 @@
+CREATE TABLE `ks_feedback` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '反馈类型',
+  `uid` int(11) unsigned NOT NULL DEFAULT '0',
+  `username` varchar(100) DEFAULT NULL,
+  `content` varchar(500) DEFAULT NULL,
+  `reply` varchar(100) DEFAULT NULL,
+  `contact_info` varchar(100) DEFAULT NULL COMMENT '联系方式',
+  `user_agent` varchar(255) DEFAULT NULL COMMENT '浏览器标识',
+  `ip_address` varchar(50) DEFAULT '0' COMMENT 'IP地址',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '处理状态:0未处理1已处理',
+  `device` varchar(30) DEFAULT '0',
+  `browser` varchar(30) DEFAULT '0',
+  `platform` varchar(30) DEFAULT '0',
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户反馈表';

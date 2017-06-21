@@ -71,6 +71,12 @@ Route::group(['prefix' => 'dict'], function (){
 
 });
 
+Route::get('website', 'WebsiteController@showList');
+Route::get('website/diqu/{area}', 'WebsiteController@showListByArea');
+Route::get('website/hangye/{industry}', 'WebsiteController@showListByIndustry');
+
+
+
 // about us
 Route::group(['prefix' => 'about'], function (){
     Route::get('/about.html', 'AboutController@about');
@@ -79,7 +85,7 @@ Route::group(['prefix' => 'about'], function (){
     Route::get('/join.html', 'AboutController@join');
     Route::get('/jobs.html', 'AboutController@jobs');
     Route::get('/feedback.html', 'AboutController@feedback');
-    Route::post('/feedback/add.html', 'AboutController@feedbackAdd');
+    Route::post('/feedback/add.html', 'AboutController@feedbackCreate');
 });
 
 // helps
