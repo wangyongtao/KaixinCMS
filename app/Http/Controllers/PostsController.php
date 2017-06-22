@@ -8,7 +8,7 @@ use Watercart\Admins\Categories as CategoryModel;
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
 
-class PostsController extends AdminController
+class PostsController extends Controller
 {
     /**
      * 列表
