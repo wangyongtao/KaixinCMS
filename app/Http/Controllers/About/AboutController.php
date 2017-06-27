@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\About;
 
 use Illuminate\Http\Request;
 use Watercart\Admins\Posts as PostModel;
 use Watercart\Admins\Categories as CategoryModel;
-use App\Http\Controllers\Admins\AdminController;
-use Illuminate\Support\Facades\DB;
 
-class AboutController extends AdminController
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BaseController;
+
+class AboutController extends BaseController
 {
 
     public function index()
@@ -64,8 +65,9 @@ class AboutController extends AdminController
 
             $input = [];
             $input['type']     = 101;
-            $input['uid']      = 0;
-            $input['ip_address']    = $request->input('content');
+            $input['uid']  = 0;
+            $input['username']  = 0;
+            $input['ip_address']    = '';
             $input['content']       = $request->input('content');
             $input['contact_info']  = $request->input('contact_info');
             $input['browser']   = '';

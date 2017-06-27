@@ -4,23 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
-use App\Http\Controllers\Admins\AdminController;
-use Illuminate\Support\Facades\DB;
+use Watercart\Admins\PostCategory as PostCategoryModel;
 
-class PostsController extends Controller
+class PagesController extends Controller
 {
     /**
-     * 列表
-     * @return string
-     */
-    public function index(Request $request)
-    {
-        return $this->showList($request);
-    }
- 
-    /**
-     * 关于我们
+     * 详情
      * @return \Illuminate\View\View
      */
     public function showDetail(Request $request, $id = 0)
@@ -30,19 +19,19 @@ class PostsController extends Controller
 
 
         $result = (new PostModel())->find($id);
-        if (empty($result)) {
-            return view('errors.404');
-        }
-        $result = $result->toArray();
+        if ($result) {
+                $result = $result->toArray();
 
-        $data['seo'] = [
-            'title'       => $result['title'],
-            'keywords'    =>  "关键词",
-            'description' => '',
-        ];
+                $data['seo'] = [
+                    'title'       => $result['title'],
+                    'keywords'    =>  "关键词",
+                    'description' => '',
+                ];
+                
+        }
         $data['detailData'] = $result;
 
-        return view('default.posts.postdetail', $data);
+        return view('posts.postdetail', $data);
     }
 
     /**
@@ -52,7 +41,6 @@ class PostsController extends Controller
     public function showList(Request $request, $category = '')
     {
         $page = $request->input('page', 0);
-        $category = $request->input('category', '');
         $data = [];
         $where = [];
         if ($category) {
@@ -64,17 +52,12 @@ class PostsController extends Controller
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getListByPlatform();
+        $data['category'] = (new PostCategoryModel())->getArticleCategory();
 
         $data['categoryCount'] = (new PostModel())->getListCountGroupByCategory();
 
         $data['listData'] = $result;
-// print_r($data);exit;
-        return view('default.posts.postlist', $data);
-    }
 
-    public function getListByCategoryName(){
-        
+        return view('posts.postlist', $data);
     }
-
 }

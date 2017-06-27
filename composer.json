@@ -9,10 +9,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "symfony/yaml": "^3.3",
-        "wangyongtao/laravel-cn-regions": "dev-master",
-        "watercart/laravel-admins": "dev-master",
-        "watercart/laravel-posts": ">=0.0.2",
-        "watercart/shoppingcart": ">=0.0.5"
+        "wangyongtao/laravel-cn-regions": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -55,17 +52,5 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
-    },
-    "repositories":[  
-        {  
-           "type":"vcs",  
-           "url":"https://github.com/watercart/shoppingcart"  
-        },{  
-           "type":"vcs",  
-           "url":"https://github.com/watercart/laravel-admins"  
-        },{  
-           "type":"vcs",  
-           "url":"https://github.com/watercart/laravel-posts"  
-        }
-   ]
+    }
 }

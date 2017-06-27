@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
 use App\Http\Controllers\Admins\AdminController;
 // use Symfony\Component\Yaml\Yaml;
 // use Symfony\Component\Yaml\Exception\ParseException;
 use Illuminate\Support\Facades\DB;
 
-class CategoriesController extends AdminController
+use App\Models\Post\PostModel;
+use App\Models\CategoryModel;
+
+class CategoryController extends AdminController
 {
     /**
      * 列表
@@ -55,7 +56,9 @@ class CategoriesController extends AdminController
             $input['parent_id'] = $request->input('parent_id', 0);
             $input['category_name']   = $request->input('category_name', '');
             $input['category_name_en']   = $request->input('category_name_en', '');
-            $input['notes'] = $request->input('notes', '');
+            if ($request->input('notes', '')) {
+                $input['notes'] = $request->input('notes', '');
+            }
             $input['created_at']  = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
@@ -106,8 +109,9 @@ class CategoriesController extends AdminController
             $input['parent_id'] = $request->input('parent_id', 0);
             $input['category_name']   = $request->input('category_name', '');
             $input['category_name_en']   = $request->input('category_name_en', '');
-            $input['notes'] = $request->input('notes', '');
-            // $input['created_at']  = date('Y-m-d H:i:s');
+            if ($request->input('notes', '')) {
+                $input['notes'] = $request->input('notes', '');
+            }
             $input['updated_at']  = date('Y-m-d H:i:s');
 
 

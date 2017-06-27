@@ -17,6 +17,7 @@ return [
         'pages'      => 'pages',
         'tags'          => 'tags',
         'tag_relations' => 'tag_relations',
+        'feedback' => 'feedback',
     ],
     // 平台
     'platform' => [

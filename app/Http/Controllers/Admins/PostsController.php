@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
+
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
+
+use App\Models\Post\PostModel;
+use App\Models\Post\PostCategoryModel;
 
 class PostsController extends AdminController
 {
@@ -29,7 +31,7 @@ class PostsController extends AdminController
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new PostCategoryModel())->getList();
         // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
 // print_r($data);exit;
 
@@ -54,7 +56,7 @@ class PostsController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['category'] = $request->input('category');
+            $input['category'] = $request->input('category', '');
 
             $input['title']    = $request->input('title');
             $input['source_name']   = $request->input('source_name', '网络');
@@ -63,7 +65,7 @@ class PostsController extends AdminController
             $input['created_at']  = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
-            $result = (new PostModel())->add(collect($input));
+            $result = (new PostModel())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;
@@ -73,7 +75,7 @@ class PostsController extends AdminController
             return response($response, 200);
 
         }
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new PostCategoryModel())->getList();
 
         return view('admins.posts.add', $data);
     }
@@ -92,7 +94,7 @@ class PostsController extends AdminController
             ];
             $input = [];
             $input['platform'] = 'posts';
-            $input['category'] = $request->input('category');
+            $input['category'] = $request->input('category', '');
 
             $input['title']    = $request->input('title');
             $input['source_name']   = $request->input('source_name', '网络');
@@ -121,7 +123,7 @@ class PostsController extends AdminController
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new PostCategoryModel())->getList();
 
         $result = $result->toArray();
         $data['detail'] = $result;

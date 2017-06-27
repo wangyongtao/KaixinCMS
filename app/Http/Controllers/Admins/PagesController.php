@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Admins\Controllers;
 
 use Illuminate\Http\Request;
 use Watercart\Admins\Posts as PostModel;

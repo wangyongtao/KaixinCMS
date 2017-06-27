@@ -26,7 +26,7 @@ class BaseModel extends EloquentModel
         parent::__construct();
     }
 
-    protected function getCacheKey($function='', $input) {
+    protected function formatCacheKey($function='', $input) {
         return sprintf('cache_%s_%s_%s_%s', $this->table, $function, date('Ymd'), md5(json_encode($input)));
     }
 

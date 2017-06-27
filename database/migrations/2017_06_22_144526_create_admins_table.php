@@ -34,9 +34,9 @@ class CreateAdminsTable extends Migration
             $table->string('category_logo')->default('');
             $table->string('category_description')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('notes')->default('Notes');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('notes')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -57,9 +57,9 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('thumb_up')->default(0)->comment('thumb_up Number');   
             $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');   
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('notes')->default('Notes');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('notes')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -75,9 +75,9 @@ class CreateAdminsTable extends Migration
             $table->string('is_hot')->default('');
             $table->string('link_owner')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('notes')->default('Notes');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('notes')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -92,7 +92,7 @@ class CreateAdminsTable extends Migration
             $table->text('content');
             $table->string('ip_address')->default('');
             $table->string('user_agent')->default('');
-            $table->string('created_by')->default('');
+            $table->string('created_by', 100)->default('');
             $table->dateTime('created_at');
         });
 
@@ -117,22 +117,13 @@ class CreateAdminsTable extends Migration
             $table->bigIncrements('id');
             $table->string('platform')->default('posts')->comment('platform english name');
             $table->string('module')->default('posts')->comment('module english name');
-            $table->string('category')->default('default')->comment('category english name');
-            $table->string('title')->default('');
-            $table->string('author')->default('');
-            $table->string('slug')->default('');
-            $table->string('source_name')->default('source_name');
-            $table->string('source_link')->default('source_link');
-            $table->longText('content');
-            $table->bigInteger('post_id')->default(0)->comment('post_id');   
-            $table->bigInteger('views')->default(0)->comment('Views Number');   
-            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');   
-            $table->bigInteger('thumb_up')->default(0)->comment('thumb_up Number');   
-            $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');   
+            $table->string('mobilephone')->default('');
+            $table->string('description')->default('');
+            $table->string('website')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('notes')->default('Notes');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('notes')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -153,9 +144,9 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('is_private')->default(0);
             $table->tinyInteger('is_mark')->default(0);
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('notes')->default('Notes');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('notes')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -167,10 +158,10 @@ class CreateAdminsTable extends Migration
             $table->string('tag_name')->default('Site Name');
             $table->string('tag_name_en')->default('English Name');
             $table->string('tag_description')->default('');
-            $table->string('notes')->default('Notes');
+            $table->string('notes')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
         Schema::create( $this->getTableName('tag_relations'), function (Blueprint $table) {
@@ -198,8 +189,8 @@ class CreateAdminsTable extends Migration
             $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');   
             $table->string('notes')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
 
@@ -212,8 +203,30 @@ class CreateAdminsTable extends Migration
             $table->mediumText('content');
             $table->string('notes')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
-            $table->string('created_by')->default('');
-            $table->string('updated_by')->default('');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
+            $table->nullableTimestamps();
+        });
+
+        // settings
+        Schema::create( $this->getTableName('feedback'), function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('type', 30);
+            $table->integer('uid')->default(0);
+            $table->string('username')->default('');
+            $table->string('module')->default('posts')->comment('module english name');
+            $table->string('title')->default('');
+            $table->string('content')->default('');
+            $table->string('notes')->default('');
+            $table->string('user_agent')->default('');
+            $table->string('ip_address')->default('');
+            $table->string('device')->default('');
+            $table->string('browser')->default('');
+            $table->string('platform')->default('');
+            $table->string('contact_info')->default('');
+            $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
+            $table->string('created_by', 100)->default('');
+            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
     }
@@ -234,5 +247,6 @@ class CreateAdminsTable extends Migration
         Schema::dropIfExists($this->getTableName('admins.tableName.user_meta'));    
         Schema::dropIfExists($this->getTableName('admins.tableName.todolist'));    
         Schema::dropIfExists($this->getTableName('admins.tableName.settings'));    
+        Schema::dropIfExists($this->getTableName('admins.tableName.feedback'));    
     }
 }

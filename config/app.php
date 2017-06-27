@@ -177,9 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Watercart\Shoppingcart\CartServiceProvider::class,
-        Watercart\Posts\PostsServiceProvider::class,
-        Watercart\Admins\AdminsServiceProvider::class,
+        // Watercart\Shoppingcart\CartServiceProvider::class,
+        // Watercart\Posts\PostsServiceProvider::class,
+        // Watercart\Admins\AdminsServiceProvider::class,
 
     ],
 
@@ -230,12 +230,24 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Cart' => Watercart\Shoppingcart\Facades\Cart::class,
-        'Posts' => Watercart\Shoppingcart\Facades\Posts::class,
+        // 'Cart' => Watercart\Shoppingcart\Facades\Cart::class,
+        // 'Posts' => Watercart\Shoppingcart\Facades\Posts::class,
 
     ],
 
     // BaiduTongji Code URL:
     // Example: "https://hm.baidu.com/hm.js?5df404c6ca6b0e31dd69fcb8d3517d85"
     'BAIDU_TONGJI' => env('BAIDU_TONGJI', ''),
+
+
+    'ChannelList' => [
+        'news' => [
+            'name' => '热点资讯',
+            'url'  => '/news/',
+        ],
+        'post' => [
+            'name' => '热点资讯',
+            'url'  => '/news/',
+        ],
+    ],
 ];

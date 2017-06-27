@@ -18,8 +18,8 @@
 // Authentication
 Auth::routes();
 
-Route::get('/', 'PostsController@index')->name('index');
-Route::get('/home', 'PostsController@index')->name('home');
+Route::get('/', 'Post\PostsController@index')->name('index');
+Route::get('/home', 'Post\PostsController@index')->name('home');
 
 // SiteMap (html)
 Route::get('sitemap.html', 'SitemapController@showHtml');
@@ -29,6 +29,7 @@ Route::get('sitemap.xml', 'SitemapController@showXml');
 // admins
 Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
+    // POST
     Route::get('/posts', 'Admins\PostsController@index')->name('admin-posts');
     Route::get('/posts/add', 'Admins\PostsController@add');
     Route::get('/posts/edit/{id}', 'Admins\PostsController@edit');
@@ -58,9 +59,9 @@ Route::group(['prefix' => 'admins'], function (){
 
 // posts
 Route::group(['prefix' => 'posts'], function (){
-    Route::get('/', 'PostsController@showList');
-    Route::get('/category-{categoryName}', 'PostsController@showList');
-    Route::get('/detail-{id}.html', 'PostsController@showDetail');
+    Route::get('/', 'Post\PostsController@showList');
+    Route::get('/category-{categoryName}', 'Post\PostsController@showList');
+    Route::get('/detail-{id}.html', 'Post\PostsController@showDetail');
 
 });
 
@@ -79,16 +80,17 @@ Route::get('website/hangye/{industry}', 'WebsiteController@showListByIndustry');
 
 // about us
 Route::group(['prefix' => 'about'], function (){
-    Route::get('/about.html', 'AboutController@about');
-    Route::get('/contact.html', 'AboutController@contact');
-    Route::get('/disclaimer.html', 'AboutController@disclaimer');
-    Route::get('/join.html', 'AboutController@join');
-    Route::get('/jobs.html', 'AboutController@jobs');
-    Route::get('/feedback.html', 'AboutController@feedback');
-    Route::post('/feedback/add.html', 'AboutController@feedbackCreate');
+    Route::get('/about.html', 'About\AboutController@about');
+    Route::get('/contact.html', 'About\AboutController@contact');
+    Route::get('/disclaimer.html', 'About\AboutController@disclaimer');
+    Route::get('/join.html', 'About\AboutController@join');
+    Route::get('/jobs.html', 'About\AboutController@jobs');
+    Route::get('/feedback.html', 'About\AboutController@feedback');
+    Route::post('/feedback/add.html', 'About\AboutController@feedbackCreate');
 });
 
 // helps
 Route::group(['help' => 'help'], function (){
 
 });
+ 
