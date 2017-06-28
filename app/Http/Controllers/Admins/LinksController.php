@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use Watercart\Admins\LinkModel;
-use Watercart\Admins\Categories as CategoryModel;
+
+use App\Models\LinkModel;
+use App\Models\CategoryModel;
 
 class LinksController extends AdminController
 {
@@ -31,7 +32,7 @@ class LinksController extends AdminController
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new CategoryModel())->getListByModule('links');
         // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
 // print_r($data);exit;
 
@@ -67,7 +68,7 @@ class LinksController extends AdminController
 
 
 
-            $result = (new LinkModel())->add(collect($input));
+            $result = (new LinkModel())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;

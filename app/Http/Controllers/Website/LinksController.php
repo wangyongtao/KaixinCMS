@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use Watercart\Admins\LinkModel;
-use Watercart\Admins\Categories as CategoryModel;
+use App\Models\LinkModel;
+use App\Models\CategoryModel;
 
 class LinkController extends AdminController
 {
@@ -33,7 +33,7 @@ class LinkController extends AdminController
 
         $data['categoryList'] = (new CategoryModel())->getList();
         // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
-// print_r($data);exit;
+print_r($data);exit;
 
         $data['listData'] = $result;
 
@@ -67,7 +67,7 @@ class LinkController extends AdminController
 
 
 
-            $result = (new LinkModel())->add(collect($input));
+            $result = (new LinkModel())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;

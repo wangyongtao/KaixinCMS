@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\PostCategory as PostCategoryModel;
+use App\Models\Posts as PostModel;
+use App\Models\PostCategory as PostCategoryModel;
 
 class PagesController extends Controller
 {

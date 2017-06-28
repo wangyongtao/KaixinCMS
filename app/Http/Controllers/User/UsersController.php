@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use Watercart\Admins\UserModel;
-use Watercart\Admins\Categories as CategoryModel;
+use App\Models\UserModel;
+use App\Models\Categories as CategoryModel;
 
 class UserController extends AdminController
 {
@@ -61,7 +61,7 @@ class UserController extends AdminController
             $input['created_at']  = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
-            $result = (new PostModel())->add(collect($input));
+            $result = (new PostModel())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;

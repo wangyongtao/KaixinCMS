@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Cache;
 
-class LinkModel extends BaseModel {
+class FeedbackModel extends BaseModel {
 
     /**
      * Constructor.
@@ -17,7 +17,7 @@ class LinkModel extends BaseModel {
     public function __construct()
     {
         parent::__construct();
-        $this->table = \Config::get('admins.tablePrefix') . \Config::get('admins.tableName.links');
+        $this->table = \Config::get('admins.tablePrefix') . \Config::get('admins.tableName.feedback');
     }
 
     public function get(int $id)

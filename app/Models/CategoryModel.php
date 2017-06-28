@@ -37,7 +37,7 @@ class CategoryModel extends BaseModel
         $cacheKey = $this->formatCacheKey(__FUNCTION__, func_get_args());
         $minutes = 1;
         $data = Cache::remember($cacheKey, $minutes, function () use ($where) {
-            $condition = [];
+            $condition = $where;
             if (isset($where['status']) && $where['status']){
                 $condition['status'] = 1;
             }
@@ -72,6 +72,13 @@ class CategoryModel extends BaseModel
         return $this->getList($where);
     }
     
+    public function getListByModule($module = '')
+    {
+        $where = [];
+        $where['module'] = $module;
+        return $this->getList($where);
+    }
+
     public function getParentCategoryList(){
         $where = [];
         $where['parent_id'] = 0;

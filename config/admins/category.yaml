@@ -26,6 +26,14 @@ edit_fields:
         name: platform
         className: form-control
         placeholder: '平台'
+    module:
+        title: 模块
+        element: input-text
+        type: text
+        id: module
+        name: module
+        className: form-control
+        placeholder: 'module'
     parent_id: 
         title: 父级分类
         element: select

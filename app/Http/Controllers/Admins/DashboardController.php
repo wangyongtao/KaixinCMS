@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\LinkModel;
-use Watercart\Admins\Categories as CategoriesModel;
-use Watercart\Admins\UserModel;
+use App\Models\Posts as PostModel;
+use App\Models\LinkModel;
+use App\Models\Categories as CategoriesModel;
+use App\Models\UserModel;
 
 class DashboardController extends AdminController
 {

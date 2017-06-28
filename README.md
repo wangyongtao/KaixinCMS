@@ -3,3 +3,4 @@
 KaixinCMS: A Free PHP CMS based on Laravel Framework
 
 
+php artisan optimize

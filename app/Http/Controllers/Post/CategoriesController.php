@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
+use App\Models\Posts as PostModel;
+use App\Models\Categories as CategoryModel;
 use App\Http\Controllers\Admins\AdminController;
 // use Symfony\Component\Yaml\Yaml;
 // use Symfony\Component\Yaml\Exception\ParseException;
@@ -59,7 +59,7 @@ class CategoryController extends AdminController
             $input['created_at']  = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
-            $result = (new CategoryModel())->add(collect($input));
+            $result = (new CategoryModel())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;

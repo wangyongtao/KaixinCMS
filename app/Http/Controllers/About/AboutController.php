@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\About;
 
 use Illuminate\Http\Request;
-use Watercart\Admins\Posts as PostModel;
-use Watercart\Admins\Categories as CategoryModel;
+use App\Models\Posts as PostModel;
+use App\Models\Categories as CategoryModel;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;

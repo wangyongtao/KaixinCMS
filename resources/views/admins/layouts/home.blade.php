@@ -13,6 +13,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
+    <style type="text/css">
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+            position: relative;
+            min-height: 1px;
+            padding-left: 5px; 
+            padding-right: 5px; 
+        }
+    </style>
 </head>
 <body id="app">
 
@@ -86,9 +94,9 @@
                     @endif -->
 
                     @if ( Request::is('admins/feedback*') )
-                        <li class="active"><a href="{{ route('admin-orders') }}">反馈</a></li>
+                        <li class="active"><a href="{{ route('admin-feedback') }}">反馈</a></li>
                     @else
-                        <li class=""><a href="{{ route('admin-orders') }}">反馈</a></li>
+                        <li class=""><a href="{{ route('admin-feedback') }}">反馈</a></li>
                     @endif
 
                     @if ( Request::is('admins/settings*') )
@@ -136,19 +144,20 @@
             <div class="col-md-2" style="font-size:12px">
             @section('sidebar')
 
-<!--             <div class="list-group">
-			  <a href="#" class="list-group-item active">
-			    管理后台
-			  </a>
-			  <a href="/admins/posts" class="list-group-item"> > 文章 (Posts)</a>
+                @if(! empty($categoryList))
+                 <ul class="list-group">
+                    <!-- <li class="list-group-item active">分类列表</li> -->
+                    @foreach ($categoryList as $rows)
+                        <li class="list-group-item">
+                            <a href="/admins/posts?category={{ $rows['category_name_en'] }}">
+                                <strong> {{ $rows['category_name'] }} </strong>
+                                <span class="badge">{{ isset($categoryCount[$rows['category_name_en']]) ? $categoryCount[$rows['name_en']] : '' }}</span></a>
+                        </li>
+                        
+                    @endforeach
+                </ul>
+                @endif
 
-			  <a href="/admins/categories" class="list-group-item"> > 分类 (Categories)</a>
-
-			  <a href="/admins/links" class="list-group-item"> > 链接 (Links)</a>
-
-			  <a href="/admins/users" class="list-group-item"> > 用户 (Users)</a>
-
-			</div> -->
             @show
             </div>
             <div class="col-md-10"> @yield('content') </div>

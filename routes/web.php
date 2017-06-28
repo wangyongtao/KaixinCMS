@@ -47,13 +47,14 @@ Route::group(['prefix' => 'admins'], function (){
     Route::get('/settings', 'Admins\SettingsController@index')->name('admin-settings');
     // users
     Route::get('/users', 'Admins\UsersController@index')->name('admin-users');
+    // feedback
+    Route::get('/feedback', 'Admins\FeedbackController@index')->name('admin-feedback');
 
     // 待开发
     Route::get('/goods', 'Admins\UserController@index')->name('admin-goods');
     Route::get('/orders', 'Admins\UserController@index')->name('admin-orders');
     Route::get('/promotion', 'Admins\UserController@index')->name('admin-promotion');
     Route::get('/advisory', 'Admins\UserController@index')->name('admin-advisory');
-    Route::get('/feedback', 'Admins\UserController@index')->name('admin-feedback');
     Route::post('/feedback/add', 'Admins\UserController@index');
 });
 
