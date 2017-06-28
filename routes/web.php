@@ -50,6 +50,13 @@ Route::group(['prefix' => 'admins'], function (){
     // feedback
     Route::get('/feedback', 'Admins\FeedbackController@index')->name('admin-feedback');
 
+    // 图书教程
+    Route::get('/books', 'Admins\BookController@index')->name('admin-books');
+    Route::get('/books/add', 'Admins\BookController@add');
+    Route::get('/books/edit/{id}', 'Admins\BookController@edit');
+    Route::post('/books/add', 'Admins\BookController@add');
+    Route::post('/books/edit/{id}', 'Admins\BookController@edit');
+
     // 待开发
     Route::get('/goods', 'Admins\UserController@index')->name('admin-goods');
     Route::get('/orders', 'Admins\UserController@index')->name('admin-orders');

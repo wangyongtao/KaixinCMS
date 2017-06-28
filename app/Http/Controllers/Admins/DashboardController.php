@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admins;
 
 use Illuminate\Http\Request;
-use App\Models\Posts as PostModel;
+use App\Models\Post\PostModel;
 use App\Models\LinkModel;
-use App\Models\Categories as CategoriesModel;
+use App\Models\CategoryModel;
 use App\Models\UserModel;
 
 class DashboardController extends AdminController
@@ -20,7 +20,7 @@ class DashboardController extends AdminController
         $data = [];
         $data['LinkCount'] = LinkModel::where('status', 1)->count();
         $data['PostCount'] = PostModel::where('status', 1)->count();
-        $data['CategoryCount'] = CategoriesModel::where('status', 1)->count();
+        $data['CategoryCount'] = CategoryModel::where('status', 1)->count();
         $data['UserCount'] = UserModel::where('id', '>=', 1)->count();
 
         return view('admins.dashboard', $data);

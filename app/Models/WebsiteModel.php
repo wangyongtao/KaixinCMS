@@ -12,7 +12,7 @@ class WebsiteModel extends BaseModel
      *
      * @var string
      */
-    protected $table = 'data_websites';
+    protected $table = 'ks_rank_websites';
 
     /**
      * Indicates if the model should be timestamped.

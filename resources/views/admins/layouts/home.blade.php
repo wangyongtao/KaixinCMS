@@ -68,6 +68,11 @@
                     @else
                         <li class=""><a href="{{ route('admin-users') }}">用户</a></li>
                     @endif
+                    @if ( Request::is('admins/books*') )
+                        <li class="active"><a href="{{ route('admin-books') }}">教程</a></li>
+                    @else
+                        <li class=""><a href="{{ route('admin-books') }}">教程</a></li>
+                    @endif
 <!-- 
                     @if ( Request::is('admins/goods*') )
                         <li class="active"><a href="{{ route('admin-goods') }}">商品</a></li>

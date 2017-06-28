@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 //use App\Http\Controllers\BaseController;
 use App\Models\WebsiteModel;
 
-class WebsiteController extends Controller
+class WebsiteController extends BaseController
 {
     public function index(Request $request)
     {
