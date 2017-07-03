@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Post\PostModel;
 use App\Models\Post\PostCategoryModel;
+use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Yaml\Exception\ParseException;
+
 
 class PostsController extends AdminController
 {
@@ -46,7 +49,19 @@ class PostsController extends AdminController
      */
     public function add(Request $request)
     {
+        try {
+            if ($type == 'category'){
+                $content = Yaml::parse(file_get_contents(config_path('admins/category.yaml')));
 
+            } elseif ($type == 'links' ) {
+                $content = Yaml::parse(file_get_contents(config_path('admins/links.yaml')));
+            } elseif ($type == 'books' ) {
+                $content = Yaml::parse(file_get_contents(config_path('admins/books.yaml')));
+            }
+            // print_r($content);
+        } catch (ParseException $e) {
+            printf("Unable to parse the YAML string: %s", $e->getMessage());
+        }
         if ( $request->input('title') !== null ) {
             $response = [
                 'code' => 0,

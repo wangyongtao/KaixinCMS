@@ -52,11 +52,12 @@ Route::group(['prefix' => 'admins'], function (){
 
     // 图书教程
     Route::get('/books', 'Admins\BookController@index')->name('admin-books');
-    Route::get('/books/add', 'Admins\BookController@add');
-    Route::get('/books/edit/{id}', 'Admins\BookController@edit');
-    Route::post('/books/add', 'Admins\BookController@add');
-    Route::post('/books/edit/{id}', 'Admins\BookController@edit');
-
+    Route::match(['get', 'post'], '/books/add',  'Admins\BookController@add');
+    Route::match(['get', 'post'], '/books/edit/{id}', 'Admins\BookController@edit');
+    Route::match(['get', 'post'], '/books/section', 'Admins\BookController@sectionList');
+    Route::match(['get', 'post'], '/books/section/add', 'Admins\BookController@sectionAdd');
+    Route::match(['get', 'post'], '/books/section/edit/{id}', 'Admins\BookController@sectionEdit');
+ 
     // 待开发
     Route::get('/goods', 'Admins\UserController@index')->name('admin-goods');
     Route::get('/orders', 'Admins\UserController@index')->name('admin-orders');

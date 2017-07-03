@@ -1,23 +1,21 @@
 # category.form.edit.yaml
 title: 教程管理
 model: BooksModel
-# AJAX添加提交地址
+# AJAX添加与编辑的提交地址
 ajax_add_url: /admins/books/add
-# AJX编辑提交地址
 ajax_edit_url: /admins/books/edit
 
 show_fields:
 
 edit_fields:
-
-    category_id: 
-        title: 分类ID
+    parent_id: 
+        title: ID
         element: input-text
         type: text
-        id: category_id
-        name: category_id
+        id: id
+        name: id
         className: form-control
-        placeholder: '分类ID'
+        placeholder: '教程ID'
     platform:
         title: 平台
         element: input-text
@@ -26,38 +24,38 @@ edit_fields:
         name: platform
         className: form-control
         placeholder: '平台'
-    module:
-        title: 模块
+    category:
+        title: 分类
         element: input-text
         type: text
-        id: module
-        name: module
+        id: category
+        name: category
         className: form-control
-        placeholder: 'module'
-    parent_id: 
-        title: 父级分类
-        element: select
-        type: t
-        id: parent_id
-        name: parent_id
-        className: form-control
-        placeholder: '父级分类ID'
-    category_name:
+        placeholder: 'category'
+    book_name:
         title: 中文名
         element: input-text
         type: text
-        id: category_name
-        name: category_name
+        id: book_name
+        name: book_name
         className: form-control
-        placeholder: '分类中文名'
-    category_name_en:
+        placeholder: '中文名'
+    book_name_en:
         title: 英文名
         element: input-text
         type: text
-        id: category_name_en
-        name: category_name_en
+        id: book_name_en
+        name: book_name_en
         className: form-control
-        placeholder: '分类英文名'
+        placeholder: '英文名'
+    book_description:
+        title: 描述
+        element: textarea
+        type: textarea
+        id: book_description
+        name: book_description
+        className: form-control
+        placeholder: '描述'
     notes:
         title: 备注
         element: textarea
@@ -66,3 +64,6 @@ edit_fields:
         name: notes
         className: form-control
         placeholder: '备注'
+edit_buttons:
+    add_button: '保存修改'
+    edit_button: '保存修改'

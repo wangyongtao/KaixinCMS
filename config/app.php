@@ -177,6 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        
+        App\Providers\FormServiceProvider::class,
+
         // Watercart\Shoppingcart\CartServiceProvider::class,
         // Watercart\Posts\PostsServiceProvider::class,
         // Watercart\Admins\AdminsServiceProvider::class,
