@@ -36,6 +36,7 @@ class BaseModel extends EloquentModel
     }
 
 
+
     public function getListWithPaginate($where = [], $select = '*', $page = 0, $pageSize = 20)
     {
         $minutes = 1;

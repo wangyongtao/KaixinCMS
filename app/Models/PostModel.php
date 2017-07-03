@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Models\Post;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Cache;
-use App\Models\BaseModel;
 
-class PostModel extends BaseModel 
-{
+class PostModel extends BaseModel {
 
     /**
      * Constructor.
@@ -77,7 +75,6 @@ class PostModel extends BaseModel
      */
     public function getListGroupByCategory($where = [])
     {
-        var_dump($where);exit;
         $cacheKey = $this->formatCacheKey(__FUNCTION__, func_get_args());
         $minutes = 1;
         $result = Cache::remember($cacheKey, $minutes, function () use ($where) {
@@ -125,7 +122,7 @@ class PostModel extends BaseModel
      * 获取每个分类下的文章数量
      * @return mixed
      */
-    public function getListCountGroupByCategory($where = [])
+    public function getListCountGroupByCategory($where)
     {
         $condition = [];
         if (isset($where['category']) && $where['category']) {
