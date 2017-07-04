@@ -1,4 +1,4 @@
-@extends('admins.layouts.home')
+@extends('default.layouts.posts')
  
 
 @section('sidebar')
@@ -46,30 +46,16 @@
         @if ($listData['data'])
 
             <table class="table table-striped">
-                <tr>
-                  <th>编号</th>
-                  <th>分类</th>
-                  <th>标题</th>
-                  <th>最后更新</th>
-                  <th>操作</th>
-                </tr>
+ 
             @foreach ($listData['data'] as $rows)
 
                 <tr>
-                  <th scope="row">{{ $rows['id'] }}</th>
+                  <td scope="row">{{ $rows['id'] }}</td>
+                  <td> {{$rows['category']}} </td>
+                  <td><a href="/jiaocheng/show-{{ $rows['id'] }}.html"> {{ $rows['book_name'] }} </a> </td>
                   <td>
-                    {{$rows['category']}}
-                  <td>
-                  <td>
-                    <a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['book_name'] }} </a> </td>
-                  <td>
-                    <small> {{ $rows['created_at'] ?: '--' }} </small> <br/>
                     <small> {{ $rows['updated_at'] ?: '--' }} </small> 
                   </td>
-                  <td>
-                  <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
-                  </td>
-                </tr>
  
             @endforeach
             </table>

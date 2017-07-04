@@ -56,18 +56,14 @@
             @foreach ($listData['data'] as $rows)
 
                 <tr>
-                  <th scope="row">{{ $rows['id'] }}</th>
+                  <td scope="row">{{ $rows['id'] }}</td>
+                  <td> {{$rows['category']}} </td>
+                  <td><a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['book_name'] }} </a> </td>
                   <td>
-                    {{$rows['category']}}
-                  <td>
-                  <td>
-                    <a href="/posts/detail-{{ $rows['id'] }}.html"> {{ $rows['book_name'] }} </a> </td>
-                  <td>
-                    <small> {{ $rows['created_at'] ?: '--' }} </small> <br/>
                     <small> {{ $rows['updated_at'] ?: '--' }} </small> 
                   </td>
                   <td>
-                  <a href="/admins/posts/edit/{{ $rows['id'] }}">Edit</a>
+                  <a href="/admins/books/edit/{{ $rows['id'] }}">Edit</a>
                   </td>
                 </tr>
  

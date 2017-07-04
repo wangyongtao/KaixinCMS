@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admins'], function (){
     Route::get('/dashboard', 'Admins\DashboardController@index');
     // POST
     Route::get('/posts', 'Admins\PostsController@index')->name('admin-posts');
+    Route::get('/posts/list', 'Admins\PostsController@index')->name('admin-posts-list');
     Route::get('/posts/add', 'Admins\PostsController@add');
     Route::get('/posts/edit/{id}', 'Admins\PostsController@edit');
     Route::post('/posts/add', 'Admins\PostsController@add');
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'admins'], function (){
 
     // 图书教程
     Route::get('/books', 'Admins\BookController@index')->name('admin-books');
+    Route::match(['get', 'post'], '/books/list',  'Admins\BookController@index');
     Route::match(['get', 'post'], '/books/add',  'Admins\BookController@add');
     Route::match(['get', 'post'], '/books/edit/{id}', 'Admins\BookController@edit');
     Route::match(['get', 'post'], '/books/section', 'Admins\BookController@sectionList');
@@ -85,8 +87,11 @@ Route::get('website', 'WebsiteController@showList');
 Route::get('website/diqu/{area}', 'WebsiteController@showListByArea');
 Route::get('website/hangye/{industry}', 'WebsiteController@showListByIndustry');
 
-
-
+// 教程
+Route::group(['prefix' => 'jiaocheng'], function (){
+    Route::get('/list', 'Books\BookController@showList');
+    Route::get('/show-{id}', 'Books\BookController@showDetail');
+});
 // about us
 Route::group(['prefix' => 'about'], function (){
     Route::get('/about.html', 'About\AboutController@about');

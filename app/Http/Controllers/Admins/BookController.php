@@ -103,8 +103,7 @@ class BookController extends AdminController
     public function edit(Request $request, $id=0)
     {
         if ( $request->input('_submit') !== null ) {
-                    print_r($request->all());exit;
-
+ 
             $response = [
                 'code' => 0,
                 'msg'  => '',
@@ -112,14 +111,16 @@ class BookController extends AdminController
                 'time' => time(),
             ];
             $input = [];
+            $input = [];
             $input['platform'] = 'posts';
             $input['category'] = $request->input('category', '');
 
-            $input['title']    = $request->input('title');
-            $input['source_name']   = $request->input('source_name', '网络');
-            $input['source_link']   = $request->input('source_link');
-            $input['content']  = $request->input('content');
-            // $input['created_at']  = date('Y-m-d H:i:s');
+            $input['book_name']     = $request->input('book_name');
+            $input['book_name_en']  = $request->input('book_name_en');
+            $input['book_description'] = $request->input('book_description');
+            $input['notes'] = $request->input('notes');
+            $input['created_at']    = date('Y-m-d H:i:s');
+            // $input['updated_at']  = date('Y-m-d H:i:s');
             $input['updated_at']  = date('Y-m-d H:i:s');
 
 
@@ -127,29 +128,31 @@ class BookController extends AdminController
             $where = [
                 'id' => $id,
             ];
-            $result = DB::table('ks_posts')
-                ->where($where)
-                ->update($input);
+            $result = (new BooksModel())->updateData($where, $input);
             if ($result) {
                 $response['code'] = 1;
+                $response['data'] = [
+                    'id'  => $id,
+                    'url' => '/admins/books/edit/'.$id,
+                ];
             }
         // print_r($input);
             return response($response, 200);
         }
 
         $result = (new BooksModel())->findOrFail($id);
-        print_r($result);exit;
+        // print_r($result->toArray());exit;
         if (empty($result)) {
             return "没有获取到数据.请确认URL是否正确.";
         }
 
-        $data['categoryList'] = (new PostCategoryModel())->getList();
+        // $data['categoryList'] = (new PostCategoryModel())->getList();
+        $data['configs']= $this->getYamlContent(config_path('admins/books.yaml'));
 
-        $result = $result->toArray();
-        $data['detail'] = $result;
+        $data['detail'] = $result->toArray();
 
 
-        return view('admins.posts.edit', $data);
+        return view('admins.books.bookEdit', $data);
     }
 
 }

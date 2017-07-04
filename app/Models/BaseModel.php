@@ -31,11 +31,23 @@ class BaseModel extends EloquentModel
         return sprintf('cache_%s_%s_%s_%s', $this->table, $function, date('Ymd'), md5(json_encode($input)));
     }
 
-    public function saveData(Collection $input){
-        return DB::table($this->table)->insertGetId($input->toArray());
+    public function saveData($input = []) {
+        if ($input instanceof Collection) {
+            $input = $input->toArray();
+        }
+        return self::table($this->table)->insertGetId($input);
     }
 
+    public function updateData(array $where, array $input = []) {
+        return self::where($where)->update($input);
+    }
 
+    public function insert(array $input = []) {
+        if (empty($input)) {
+            return false;
+        }
+        return self::instertGetId($input);
+    }
 
     public function getListWithPaginate($where = [], $select = '*', $page = 0, $pageSize = 20)
     {

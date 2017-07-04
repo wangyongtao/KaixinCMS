@@ -44,7 +44,7 @@ use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Yaml\Exception\ParseException;
 
 function form_create($content = [], $options = []) {
-	$editFields = $content['edit_fields'];
+	$editFields  = $content['edit_fields'];
 	$editButtons = $content['edit_buttons'];
 
 	$html = '<form id="myForm" accept-charset="UTF-8" class="simple_form form-horizontal" method="post" novalidate="novalidate">';
@@ -54,7 +54,7 @@ function form_create($content = [], $options = []) {
 	// print_r($options);exit;
 	foreach ($editFields as $fieldName => $rows) {
  
- 		$currentValue = isset($item[$fieldName]) ? $item[$fieldName] : '';
+ 		$currentValue = isset($options[$fieldName]) ? $options[$fieldName] : '';
  		if ($rows['element'] == 'input-text'){
 			$data = form_input_text($rows['name'], $currentValue, $rows['className'], $rows['placeholder']);
  		} elseif ($rows['element'] == 'select'){
