@@ -162,7 +162,8 @@ class CreateAdminsTable extends Migration
             $table->string('notes')->default('');
             $table->string('created_by', 100)->default('');
             $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
         });
 
         // Tagas
@@ -177,7 +178,8 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('created_by', 100)->default('');
             $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
         });
 
         Schema::create('tag_relations', function (Blueprint $table) {
@@ -186,7 +188,8 @@ class CreateAdminsTable extends Migration
             $table->string('module')->default('posts')->comment('module name');
             $table->string('tag_id')->default('Tag ID');
             $table->string('object_id')->default('Object ID');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
         });
 
         // pages
@@ -207,7 +210,8 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('created_by', 100)->default('');
             $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
         });
 
         // settings
@@ -221,11 +225,12 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('created_by', 100)->default('');
             $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
         });
 
         // 用户意见反馈 advice or feedback
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type', 30);
             $table->integer('uid')->default(0);
@@ -243,7 +248,59 @@ class CreateAdminsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('created_by', 100)->default('');
             $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            // index
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
+        });
+
+        // 权限表
+        Schema::create('rbac_permissions', function (Blueprint $table) {
+            $table->increments('permission_id');
+            $table->string('module')->default('');
+            $table->string('permission_name')->unique();
+            $table->string('permission_slug')->unique();
+            $table->string('description')->default('');
+            $table->tinyInteger('status')->default(1);
+            $table->string('remark')->default('');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
+            // index
+            $table->unique(['permission_name', 'permission_slug']);
+        });
+
+        // 角色表
+        Schema::create('rbac_roles', function (Blueprint $table) {
+            $table->increments('role_id');
+            $table->string('role_name')->unique();
+            $table->string('role_slug')->unique();
+            $table->text('permissions');
+            $table->string('description')->default('');
+            $table->tinyInteger('status')->default(1);
+            $table->string('remark')->default('');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
+        });
+
+        // 用户与角色关系表
+        Schema::create('rbac_user_role', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('role_id');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
+            // index
+            $table->unique(['user_id', 'role_id']);
+        });
+
+        // 角色与权限关系表
+        Schema::create('rbac_role_permission', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('permission_id');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable()->useCurrent();
+            // index
+            $table->unique(['role_id', 'permission_id']);
         });
     }
 

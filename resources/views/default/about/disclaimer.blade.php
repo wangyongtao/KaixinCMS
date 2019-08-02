@@ -1,6 +1,5 @@
-{{-- This comment will not be present in the rendered HTML --}}
-
-@extends('default.layouts.app')
+{{-- 加载布局模板文件 --}}
+@extends('default.layouts.postLayout')
 
 @section('title', 'Greeting - Xiaohua111.com')
 

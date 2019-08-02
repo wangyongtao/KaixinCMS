@@ -27,7 +27,7 @@
                  <li><a href="http://www.oschina.net/">oschina</a></li>
                  <li><a href="https://www.2345.com/?k1959251">2345</a></li>
                  <li><a href="https://github.com">github</a></li>
-                 <li><a href="/">更多链接</a></li>
+                 <li><a href="/links">更多链接</a></li>
              </ul>
         </div>
      </div>

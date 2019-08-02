@@ -1,17 +1,21 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
 namespace App\Http\Controllers\About;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Posts as PostModel;
-use App\Models\Categories as CategoryModel;
-
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\BaseController;
 
-class AboutController extends BaseController
+class AboutController extends Controller
 {
-
     public function index()
     {
         return $this->about();
@@ -45,13 +49,12 @@ class AboutController extends BaseController
         return view('default.about.join', $data);
     }
 
-
     public function feedback()
     {
         $data = [];
         $data['seo'] = [
-            'title'    => "关于我们" .'-'. config('options.sitename'),
-            'keywords' =>  "关键词",
+            'title' => '关于我们'.'-'.config('options.sitename'),
+            'keywords' => '关键词',
             'description' => '',
         ];
 
@@ -60,19 +63,17 @@ class AboutController extends BaseController
 
     public function feedbackCreate(Request $request)
     {
-
-        if ( $request->input('isSubmit') !== null ) {
-
+        if (null !== $request->input('isSubmit')) {
             $input = [];
-            $input['type']     = 101;
-            $input['uid']  = 0;
-            $input['username']  = 0;
-            $input['ip_address']    = '';
-            $input['content']       = $request->input('content');
-            $input['contact_info']  = $request->input('contact_info');
-            $input['browser']   = '';
-            $input['platform']  = '';
-            $input['device']    = '';
+            $input['type'] = 101;
+            $input['uid'] = 0;
+            $input['username'] = 0;
+            $input['ip_address'] = '';
+            $input['content'] = $request->input('content');
+            $input['contact_info'] = $request->input('contact_info');
+            $input['browser'] = '';
+            $input['platform'] = '';
+            $input['device'] = '';
             $input['user_agent'] = isset($_SERVER['HTTP_USER_AGENT']) ? ($_SERVER['HTTP_USER_AGENT']) : '';
             $input['created_at'] = date('Y-m-d H:i:s');
             $input['updated_at'] = date('Y-m-d H:i:s');
@@ -82,9 +83,8 @@ class AboutController extends BaseController
 
             return response([
                 'code' => 200,
-                'msg'  => '',
+                'msg' => '',
             ], 200);
-
         }
     }
 }

@@ -1,1 +1,0 @@
-SettingsController.stub.php

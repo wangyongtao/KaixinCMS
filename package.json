@@ -20,6 +20,12 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
-        "vue": "^2.5.17"
+        "vue": "^2.6.10",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "bulma": "^0.7.5",
+        "element-ui": "^2.10.1",
+        "prismjs": "^1.16.0"
     }
 }

@@ -11,18 +11,20 @@
 namespace App\Models;
 
 use Cache;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Categories extends Model
+class Categories extends BaseModel
 {
-    protected $primaryKey = 'category_id';
-
     /**
      * @var string
      *             The table name
      */
     protected $table = 'categories';
+
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'category_id';
 
     public function get(int $id)
     {
@@ -90,5 +92,10 @@ class Categories extends Model
         $where['parent_id'] = 0;
 
         return $this->getList($where);
+    }
+
+    public function getLinksCategoryList()
+    {
+        return $this->getListByModule('links');
     }
 }

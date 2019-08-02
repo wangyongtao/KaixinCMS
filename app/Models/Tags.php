@@ -10,9 +10,9 @@
 
 namespace App\Models\Admins;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Tags extends Model
+class Tags extends BaseModel
 {
     /**
      * @var string

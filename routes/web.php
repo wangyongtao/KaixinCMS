@@ -1,15 +1,12 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -18,24 +15,60 @@
 // Authentication
 Auth::routes();
 
-Route::get('/', 'Post\PostsController@index')->name('index');
-Route::get('/home', 'Post\PostsController@index')->name('home');
+Route::get('/', 'ArticleController@index')->name('index');
+Route::get('/home', 'ArticleController@index')->name('home');
+Route::get('/a/{id?}', 'ArticleController@showDetail')->name('article_detail');
+Route::get('/p/{id?}', 'ArticleController@showDetail')->name('post_detail');
+Route::get('/popular', 'ArticleController@showPopularList')->name('popular');
+Route::get('/popular', 'ArticleController@showPopularList')->name('popular');
+Route::get('/category/{id?}', 'ArticleController@showCategory')->name('show_category');
+Route::get('/tags/{id?}', 'ArticleController@showTag')->name('show_tags');
+
+// 用户主页 users
+Route::get('/user/{id}', 'UserController@show')->name('user_home');
+
+// 友情链接 links
+Route::get('/links', 'LinksController@show')->name('links');
 
 // SiteMap (html)
 Route::get('sitemap.html', 'SitemapController@showHtml');
 // SiteMap (xml)
 Route::get('sitemap.xml', 'SitemapController@showXml');
+// 关于我们 about us
+Route::group(['prefix' => 'about'], function () {
+    Route::get('/about.html', 'About\AboutController@about');
+    Route::get('/contact.html', 'About\AboutController@contact');
+    Route::get('/disclaimer.html', 'About\AboutController@disclaimer');
+    Route::get('/join.html', 'About\AboutController@join');
+    Route::get('/jobs.html', 'About\AboutController@jobs');
+    Route::get('/feedback.html', 'About\AboutController@feedback');
+    Route::post('/feedback/add.html', 'About\AboutController@feedbackCreate');
+});
+
+Route::group(['prefix' => 'dict'], function () {
+    Route::get('/', 'DictController@showList');
+    Route::get('/roots.html', 'DictController@getList');
+    Route::get('/detail-{id}.html', 'DictController@showDetail');
+});
+
+// 教程
+Route::group(['prefix' => 'jiaocheng'], function () {
+    Route::get('/list', 'Books\BookController@showList');
+    Route::get('/show-{id}', 'Books\BookController@showDetail');
+});
 
 // admins
-Route::group(['prefix' => 'admins'], function (){
-    Route::get('/dashboard', 'Admins\DashboardController@index');
+Route::group(['prefix' => 'admins'], function () {
+//    Route::get('/dashboard', 'Admins\DashboardController@show');
+    Route::get('/dashboard', 'Admins\DashboardController@show');
+
     // POST
-    Route::get('/posts', 'Admins\PostsController@index')->name('admin-posts');
-    Route::get('/posts/list', 'Admins\PostsController@index')->name('admin-posts-list');
-    Route::get('/posts/add', 'Admins\PostsController@add');
-    Route::get('/posts/edit/{id}', 'Admins\PostsController@edit');
-    Route::post('/posts/add', 'Admins\PostsController@add');
-    Route::post('/posts/edit/{id}', 'Admins\PostsController@edit');
+    Route::get('/posts', 'Admins\ArticlesController@index')->name('admin-posts');
+    Route::get('/posts/list', 'Admins\ArticlesController@index')->name('admin-posts-list');
+    Route::get('/posts/add', 'Admins\ArticlesController@add');
+    Route::get('/posts/edit/{id}', 'Admins\ArticlesController@edit');
+    Route::post('/posts/add', 'Admins\ArticlesController@add');
+    Route::post('/posts/edit/{id}', 'Admins\ArticlesController@edit');
 
     Route::get('/categories', 'Admins\CategoryController@index')->name('admin-category');
     Route::match(['get', 'post'], '/categories/add', 'Admins\CategoryController@add');
@@ -53,13 +86,13 @@ Route::group(['prefix' => 'admins'], function (){
 
     // 图书教程
     Route::get('/books', 'Admins\BookController@index')->name('admin-books');
-    Route::match(['get', 'post'], '/books/list',  'Admins\BookController@index');
-    Route::match(['get', 'post'], '/books/add',  'Admins\BookController@add');
+    Route::match(['get', 'post'], '/books/list', 'Admins\BookController@index');
+    Route::match(['get', 'post'], '/books/add', 'Admins\BookController@add');
     Route::match(['get', 'post'], '/books/edit/{id}', 'Admins\BookController@edit');
     Route::match(['get', 'post'], '/books/section', 'Admins\BookController@sectionList');
     Route::match(['get', 'post'], '/books/section/add', 'Admins\BookController@sectionAdd');
     Route::match(['get', 'post'], '/books/section/edit/{id}', 'Admins\BookController@sectionEdit');
- 
+
     // 待开发
     Route::get('/goods', 'Admins\UserController@index')->name('admin-goods');
     Route::get('/orders', 'Admins\UserController@index')->name('admin-orders');
@@ -67,44 +100,3 @@ Route::group(['prefix' => 'admins'], function (){
     Route::get('/advisory', 'Admins\UserController@index')->name('admin-advisory');
     Route::post('/feedback/add', 'Admins\UserController@index');
 });
-
-// posts
-Route::group(['prefix' => 'posts'], function (){
-    Route::get('/', 'Post\PostsController@showList');
-    Route::get('/category-{categoryName}', 'Post\PostsController@showList');
-    Route::get('/detail-{id}.html', 'Post\PostsController@showDetail');
-
-});
-
-Route::group(['prefix' => 'dict'], function (){
-    Route::get('/', 'DictController@showList');
-    Route::get('/roots.html', 'DictController@getList');
-    Route::get('/detail-{id}.html', 'DictController@showDetail');
-
-});
-
-Route::get('website', 'WebsiteController@showList');
-Route::get('website/diqu/{area}', 'WebsiteController@showListByArea');
-Route::get('website/hangye/{industry}', 'WebsiteController@showListByIndustry');
-
-// 教程
-Route::group(['prefix' => 'jiaocheng'], function (){
-    Route::get('/list', 'Books\BookController@showList');
-    Route::get('/show-{id}', 'Books\BookController@showDetail');
-});
-// about us
-Route::group(['prefix' => 'about'], function (){
-    Route::get('/about.html', 'About\AboutController@about');
-    Route::get('/contact.html', 'About\AboutController@contact');
-    Route::get('/disclaimer.html', 'About\AboutController@disclaimer');
-    Route::get('/join.html', 'About\AboutController@join');
-    Route::get('/jobs.html', 'About\AboutController@jobs');
-    Route::get('/feedback.html', 'About\AboutController@feedback');
-    Route::post('/feedback/add.html', 'About\AboutController@feedbackCreate');
-});
-
-// helps
-Route::group(['help' => 'help'], function (){
-
-});
- 

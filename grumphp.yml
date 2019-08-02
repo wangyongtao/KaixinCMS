@@ -1,13 +1,16 @@
 parameters:
   git_dir: .
   bin_dir: vendor/bin
+  additional_info: "\n请在代码审查都成功后再提交哦~\n"
   tasks:
       phpcs:
         standard: PSR2
         triggered_by: [php]
         ignore_patterns:
           - themes/
-          - public/
+          - public/index.php
+          - bootstrap/
+          - resources/views/
       phpcsfixer2:
         allow_risky: ~
         cache_file: ~
@@ -17,4 +20,10 @@ parameters:
         config_contains_finder: true
         verbose: true
         diff: false
+        triggered_by: ['php']
+      phpmd:
+        whitelist_patterns: []
+        exclude: []
+        #ruleset: ['codesize', 'naming']
+        ruleset: ['ruleset.xml']
         triggered_by: ['php']

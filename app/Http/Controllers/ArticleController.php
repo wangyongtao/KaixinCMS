@@ -8,10 +8,10 @@
  * MIT LICENSE.
  */
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use App\Models\Categories;
-use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -19,17 +19,33 @@ class ArticleController extends Controller
     /**
      * 列表.
      *
+     * @param Request $request
+     *
      * @return string
      */
     public function index(Request $request)
     {
-        return $this->showList($request);
+        $data = $this->showList($request);
+
+        $data['headline'] = '首页推荐';
+        // print_r($data['categoryList']);exit;
+        return view('default.posts.postList', $data);
+    }
+
+    public function showPopularList(Request $request)
+    {
+        $data = $this->showList($request);
+
+        $data['headline'] = '热门文章';
+        // print_r($data['categoryList']);exit;
+        return view('default.posts.postList', $data);
     }
 
     /**
      * 关于我们.
      *
-     * @param mixed $id
+     * @param Request $request
+     * @param mixed   $id
      *
      * @return \Illuminate\View\View
      */
@@ -37,7 +53,7 @@ class ArticleController extends Controller
     {
         $data = [];
 
-        $result = (new Posts())->find($id);
+        $result = (new Articles())->find($id);
         if (empty($result)) {
             return view('errors.404');
         }
@@ -50,13 +66,14 @@ class ArticleController extends Controller
         ];
         $data['detailData'] = $result;
 
-        return view('default.posts.postdetail', $data);
+        return view('default.posts.postDetail', $data);
     }
 
     /**
      * 列表.
      *
-     * @param mixed $category
+     * @param Request $request
+     * @param mixed   $category
      *
      * @return string
      */
@@ -70,17 +87,20 @@ class ArticleController extends Controller
             $where['category'] = $category;
         }
 
-        $result = (new Posts())->getListWithPaginate($where, $page);
+        $result = (new Articles())->getListWithPaginate(collect([
+            'where' => $where,
+            'page' => $page,
+        ]));
         if (empty($result)) {
             return '没有获取到数据.请确认URL是否正确.';
         }
 
         $data['categoryList'] = (new Categories())->getListByPlatform();
 
-        $data['categoryCount'] = (new Posts())->getListCountGroupByCategory();
+        $data['categoryCount'] = (new Articles())->getListCountGroupByCategory();
 
         $data['listData'] = $result;
-        // print_r($data['categoryList']);exit;
-        return view('default.posts.postlist', $data);
+
+        return $data;
     }
 }

@@ -8,9 +8,8 @@
  * MIT LICENSE.
  */
 
-namespace App\Models\Post;
+namespace App\Models;
 
-use App\Models\BaseModel;
 use Cache;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +32,7 @@ class Articles extends BaseModel
      */
     public function getList(Collection $where, $limit = 10): Collection
     {
-        $cacheKey = sprintf('cache_%_%s_%s', $this->table, date('YmdHis'), json_encode(\func_get_args()));
+        $cacheKey = sprintf('cache_%_%s_%s', $this->table, date('YmdH'), json_encode(\func_get_args()));
         if (null === ($result = Cache::get($cacheKey))) {
             info('cache: '.$cacheKey);
             $condition = [];
@@ -73,11 +72,9 @@ class Articles extends BaseModel
      */
     public function getListGroupByCategory($where = [])
     {
-        var_dump($where);
-        exit;
         $cacheKey = $this->formatCacheKey(__FUNCTION__, \func_get_args());
         $minutes = 1;
-        $result = Cache::remember($cacheKey, $minutes, function () use ($where) {
+        $result = Cache::remember($cacheKey, $minutes, function () use ($cacheKey, $minutes, $where) {
             $data = [];
             $data['count'] = $this->getListCountGroupByCategory($where);
             $data['list'] = $this->getListDataGroupByCategory($where);
@@ -133,22 +130,22 @@ class Articles extends BaseModel
         //     $condition['industry'] = $where['industry'];
         // }
         // $condition['status'] = 1;
-
-        $result = collect($categoryResult)->map(function ($item, $key) {
-            $where = collect([
-                'select' => 'id, title, category',
-                'category' => $key,
-            ]);
-
-            $res = $this->getList($where);
-
-            if ($res->isEmpty()) {
-                return false;
-            }
-
-            return $res->sortByDesc('id')->toArray();
-        });
-
-        return $result;
+//        $categoryResult = collect();
+//        $result = collect($categoryResult)->map(function ($item, $key) {
+//            $where = collect([
+//                'select' => 'id, title, category',
+//                'category' => $key,
+//            ]);
+//            $item;
+//            $res = $this->getList($where);
+//
+//            if ($res->isEmpty()) {
+//                return false;
+//            }
+//
+//            return $res->sortByDesc('id')->toArray();
+//        });
+//
+//        return $result;
     }
 }

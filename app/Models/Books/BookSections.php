@@ -1,26 +1,27 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
 namespace App\Models\Books;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use Cache;
 use App\Models\BaseModel;
 
-class BookSectionsModel extends BaseModel 
+class BookSections extends BaseModel
 {
+    /**
+     * @var string
+     *             The table name
+     */
+    protected $table = 'book_sections';
 
     /**
-     * Constructor.
-     *
-     * @return void
+     * @var string
      */
-    public function __construct()
-    {
-        parent::__construct();
-        // $this->table = \Config::get('admins.tablePrefix') . \Config::get('admins.tableName.posts');
-        $this->table = 'kx_book_sections';
-    }
- 
+    protected $primaryKey = 'id';
 }

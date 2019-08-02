@@ -1,6 +1,5 @@
-{{-- This comment will not be present in the rendered HTML --}}
-
-@extends('default.layouts.app')
+{{-- 加载布局模板文件 --}}
+@extends('default.layouts.postLayout')
 
 @section('title', "联系我们" .'-'. config('options.sitename'))
 

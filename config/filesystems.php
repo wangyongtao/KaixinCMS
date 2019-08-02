@@ -1,7 +1,14 @@
 <?php
 
-return [
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -13,7 +20,8 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    //'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 'upload'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,10 +50,22 @@ return [
     */
 
     'disks' => [
+        'static' => [
+            'driver' => 'local',
+            'root' => public_path('static'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
 
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+        // upload config
+        'upload' => [
+            'driver' => 'local',
+            'root' => public_path('upload'),
+            'url' => env('APP_URL').'/storage',
         ],
 
         'public' => [
@@ -63,7 +83,5 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-
     ],
-
 ];

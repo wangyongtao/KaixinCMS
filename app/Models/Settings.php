@@ -11,30 +11,16 @@
 namespace App\Models;
 
 use Cache;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Settings extends Model
+class Settings extends BaseModel
 {
     /**
-     * Constructor.
+     * @var string
+     *             The table name
      */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->table = \Config::get('admins.tablePrefix').\Config::get('admins.tableName.settings');
-    }
-
-    public function get(int $id)
-    {
-        $where = [
-            'id' => $id,
-            'status' => 1,
-        ];
-
-        return DB::table($this->table)->where($where)->get();
-    }
+    protected $table = 'settings';
 
     /**
      * 获取列表数据.
@@ -46,6 +32,7 @@ class Settings extends Model
      */
     public function getList(Collection $where, $limit = 10): Collection
     {
+        $minutes = 1;
         $cacheKey = sprintf('cache_%_%s_%s', $this->table, date('YmdHis'), json_encode(\func_get_args()));
         if (null === ($result = Cache::get($cacheKey))) {
             info('cache: '.$cacheKey);
@@ -71,7 +58,7 @@ class Settings extends Model
                 ->get()
             ;
 
-            Cache::put($cacheKey, $result, $minutes = 1);
+            Cache::put($cacheKey, $result, $minutes);
         }
 
         return $result;

@@ -10,21 +10,13 @@
 
 namespace App\Models\Admins;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class UserOperationLogs extends Model
+class UserOperationLogs extends BaseModel
 {
     /**
      * @var string
      *             The table name
      */
-    protected $table;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->table = \Config::get('admins.tablePrefix').\Config::get('admins.tableName.operation_logs');
-    }
+    protected $table = 'user_operations';
 }

@@ -1,7 +1,14 @@
 <?php
 
-return [
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -12,7 +19,7 @@ return [
     | the usual Laravel view path has already been registered for you.
     |
     */
-
+    // 修改默认视图模板路径
     'paths' => [
         resource_path('views'),
     ],
@@ -32,5 +39,4 @@ return [
         'VIEW_COMPILED_PATH',
         realpath(storage_path('framework/views'))
     ),
-
 ];

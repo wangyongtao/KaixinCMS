@@ -1,19 +1,25 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
 namespace App\Http\Controllers\Admins;
 
+use App\Models\Categories;
+use App\Models\Feedbacks;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-
-use App\Models\FeedbackModel;
-use App\Models\CategoryModel;
 
 class FeedbackController extends AdminController
 {
     /**
-     * 列表
+     * 列表.
+     *
      * @return string
      */
     public function index(Request $request)
@@ -26,32 +32,30 @@ class FeedbackController extends AdminController
             $where['category'] = $category;
         }
 
-        $result = (new FeedbackModel())->getListWithPaginate($where, $page);
+        $result = (new Feedbacks())->getListWithPaginate(collect([
+            'where' => $where,
+            'page' => $page,
+        ]));
         // print_r($result);
         if (empty($result)) {
-            return "没有获取到数据.请确认URL是否正确.";
+            return '没有获取到数据.请确认URL是否正确.';
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new Categories())->getList();
         // $data['categoryCount'] = (new PostModel())->getListGroupByCategory();
-// print_r($data);exit;
+        // print_r($data);exit;
 
         $data['listData'] = $result;
 
         return view('admins.feedback.list', $data);
     }
 
-
-    /**
-     *
-     */
     public function add(Request $request)
     {
-
-        if ( $request->input('_submit') !== null ) {
+        if (null !== $request->input('_submit')) {
             $response = [
                 'code' => 0,
-                'msg'  => '',
+                'msg' => '',
                 'data' => [],
                 'time' => time(),
             ];
@@ -59,30 +63,27 @@ class FeedbackController extends AdminController
             $input['platform'] = 'posts';
             $input['module'] = $request->input('module', 'links');
 
-            $input['link_name']   = $request->input('link_name', '');
-            $input['link_name_en']   = $request->input('link_name_en', '');
-            $input['link_url']   = $request->input('link_url');
-            $input['notes']   = $request->input('notes');
+            $input['link_name'] = $request->input('link_name', '');
+            $input['link_name_en'] = $request->input('link_name_en', '');
+            $input['link_url'] = $request->input('link_url');
+            $input['notes'] = $request->input('notes');
             // $input['created_at']  = date('Y-m-d H:i:s');
-            $input['updated_at']  = date('Y-m-d H:i:s');
+            $input['updated_at'] = date('Y-m-d H:i:s');
 
-
-
-            $result = (new FeedbackModel())->saveData(collect($input));
+            $result = (new Feedbacks())->saveData(collect($input));
 
             if ($result) {
                 $response['code'] = 1;
                 $response['data'] = $result;
             }
-        // print_r($input);
+            // print_r($input);
             return response($response, 200);
-
         }
-        $data['categoryList'] = (new CategoryModel())->getList();
-        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
- 
-        $data['options'] = array();
-        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
+        $data['categoryList'] = (new Categories())->getList();
+        $data['parentCategoryList'] = (new Categories())->getParentCategoryList();
+
+        $data['options'] = [];
+        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function ($item) {
             // print_r($item);
             return [$item['category_id'] => $item['category_name']];
         });
@@ -90,15 +91,15 @@ class FeedbackController extends AdminController
         return view('admins.links.add', $data);
     }
 
-        /**
-     *
+    /**
+     * @param mixed $id
      */
-    public function edit(Request $request, $id=0)
+    public function edit(Request $request, $id = 0)
     {
-        if ( $request->input('_submit') !== null ) {
+        if (null !== $request->input('_submit')) {
             $response = [
                 'code' => 0,
-                'msg'  => '',
+                'msg' => '',
                 'data' => [],
                 'time' => time(),
             ];
@@ -106,46 +107,43 @@ class FeedbackController extends AdminController
             $input['platform'] = 'posts';
             $input['module'] = $request->input('module', 'links');
 
-            $input['link_name']   = $request->input('link_name', '');
-            $input['link_name_en']   = $request->input('link_name_en', '');
-            $input['link_url']   = $request->input('link_url');
-            $input['notes']   = $request->input('notes');
+            $input['link_name'] = $request->input('link_name', '');
+            $input['link_name_en'] = $request->input('link_name_en', '');
+            $input['link_url'] = $request->input('link_url');
+            $input['notes'] = $request->input('notes');
             // $input['created_at']  = date('Y-m-d H:i:s');
-            $input['updated_at']  = date('Y-m-d H:i:s');
-
-
+            $input['updated_at'] = date('Y-m-d H:i:s');
 
             $where = [
                 'id' => $id,
             ];
             $result = DB::table('ks_links')
                 ->where($where)
-                ->update($input);
+                ->update($input)
+            ;
             if ($result) {
                 $response['code'] = 1;
             }
-        // print_r($input);
+            // print_r($input);
             return response($response, 200);
         }
 
         $result = (new LinkModel())->find($id);
         if (empty($result)) {
-            return "没有获取到数据.请确认URL是否正确.";
+            return '没有获取到数据.请确认URL是否正确.';
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
-        $data['parentCategoryList'] = (new CategoryModel)->getParentCategoryList();
+        $data['categoryList'] = (new Categories())->getList();
+        $data['parentCategoryList'] = (new Categories())->getParentCategoryList();
 
         $result = $result->toArray();
         $data['detail'] = $result;
-        $data['options'] = array();
-        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function($item){
+        $data['options'] = [];
+        $data['options']['parent_id'] = collect($data['parentCategoryList'])->mapWithKeys(function ($item) {
             // print_r($item);
             return [$item['category_id'] => $item['category_name']];
         });
-        
 
         return view('admins.links.edit', $data);
     }
-
 }

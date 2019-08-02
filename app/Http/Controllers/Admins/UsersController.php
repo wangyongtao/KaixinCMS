@@ -1,18 +1,25 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
 namespace App\Http\Controllers\Admins;
 
+use App\Models\Categories as Categories;
+use App\Models\Users;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Admins\AdminController;
 use Illuminate\Support\Facades\DB;
-use App\Models\UserModel;
-use App\Models\Categories as CategoryModel;
 
 class UsersController extends AdminController
 {
     /**
-     * 列表
+     * 列表.
+     *
      * @return string
      */
     public function index(Request $request)
@@ -24,29 +31,25 @@ class UsersController extends AdminController
         if ($category) {
             $where['category'] = $category;
         }
-
-        $result = (new UserModel())->getListWithPaginate($where, $page);
+        $result = (new Users())->getListWithPaginate(collect([
+            'where' => $where,
+            'page' => $page,
+        ]));
         if (empty($result)) {
-            return "没有获取到数据.请确认URL是否正确.";
+            return '没有获取到数据.请确认URL是否正确.';
         }
 
- 
         $data['listData'] = $result;
 
         return view('admins.users.list', $data);
     }
 
-
-    /**
-     *
-     */
     public function add(Request $request)
     {
-
-        if ( $request->input('title') !== null ) {
+        if (null !== $request->input('title')) {
             $response = [
                 'code' => 0,
-                'msg'  => '',
+                'msg' => '',
                 'data' => [],
                 'time' => time(),
             ];
@@ -54,11 +57,11 @@ class UsersController extends AdminController
             $input['platform'] = 'posts';
             $input['category'] = $request->input('category');
 
-            $input['title']    = $request->input('title');
-            $input['source_name']   = $request->input('source_name', '网络');
-            $input['source_link']   = $request->input('source_link');
-            $input['content']  = $request->input('content');
-            $input['created_at']  = date('Y-m-d H:i:s');
+            $input['title'] = $request->input('title');
+            $input['source_name'] = $request->input('source_name', '网络');
+            $input['source_link'] = $request->input('source_link');
+            $input['content'] = $request->input('content');
+            $input['created_at'] = date('Y-m-d H:i:s');
             // $input['updated_at']  = date('Y-m-d H:i:s');
 
             $result = (new PostModel())->saveData(collect($input));
@@ -67,24 +70,23 @@ class UsersController extends AdminController
                 $response['code'] = 1;
                 $response['data'] = $result;
             }
-        // print_r($input);
+            // print_r($input);
             return response($response, 200);
-
         }
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new Categories())->getList();
 
         return view('admins.posts.add', $data);
     }
 
-        /**
-     *
+    /**
+     * @param mixed $id
      */
-    public function edit(Request $request, $id=0)
+    public function edit(Request $request, $id = 0)
     {
-        if ( $request->input('title') !== null ) {
+        if (null !== $request->input('title')) {
             $response = [
                 'code' => 0,
-                'msg'  => '',
+                'msg' => '',
                 'data' => [],
                 'time' => time(),
             ];
@@ -92,40 +94,37 @@ class UsersController extends AdminController
             $input['platform'] = 'posts';
             $input['category'] = $request->input('category');
 
-            $input['title']    = $request->input('title');
-            $input['source_name']   = $request->input('source_name', '网络');
-            $input['source_link']   = $request->input('source_link');
-            $input['content']  = $request->input('content');
+            $input['title'] = $request->input('title');
+            $input['source_name'] = $request->input('source_name', '网络');
+            $input['source_link'] = $request->input('source_link');
+            $input['content'] = $request->input('content');
             // $input['created_at']  = date('Y-m-d H:i:s');
-            $input['updated_at']  = date('Y-m-d H:i:s');
-
-
+            $input['updated_at'] = date('Y-m-d H:i:s');
 
             $where = [
                 'id' => $id,
             ];
             $result = DB::table('ks_posts')
                 ->where($where)
-                ->update($input);
+                ->update($input)
+            ;
             if ($result) {
                 $response['code'] = 1;
             }
-        // print_r($input);
+            // print_r($input);
             return response($response, 200);
         }
 
         $result = (new PostModel())->find($id);
         if (empty($result)) {
-            return "没有获取到数据.请确认URL是否正确.";
+            return '没有获取到数据.请确认URL是否正确.';
         }
 
-        $data['categoryList'] = (new CategoryModel())->getList();
+        $data['categoryList'] = (new Categories())->getList();
 
         $result = $result->toArray();
         $data['detail'] = $result;
 
-
         return view('admins.posts.edit', $data);
     }
-
 }

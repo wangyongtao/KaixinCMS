@@ -43,7 +43,7 @@ class Model extends EloquentModel
             $input = $input->toArray();
         }
 
-        return self::table($this->table)->insertGetId($input);
+        return self::insertGetId($input);
     }
 
     public function updateData(array $where, array $input = [])

@@ -11,11 +11,10 @@
 namespace App\Models;
 
 use Cache;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Feedbacks extends Model
+class Feedbacks extends BaseModel
 {
     /**
      * @var string
@@ -33,6 +32,7 @@ class Feedbacks extends Model
      */
     public function getList(Collection $where, $limit = 10): Collection
     {
+        $minutes = 1;
         $cacheKey = sprintf('cache_%_%s_%s', $this->table, date('YmdHis'), json_encode(\func_get_args()));
         if (null === ($result = Cache::get($cacheKey))) {
             info('cache: '.$cacheKey);
@@ -58,7 +58,7 @@ class Feedbacks extends Model
                 ->get()
             ;
 
-            Cache::put($cacheKey, $result, $minutes = 1);
+            Cache::put($cacheKey, $result, $minutes);
         }
 
         return $result;
