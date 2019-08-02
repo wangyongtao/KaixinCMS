@@ -1,0 +1,20 @@
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
+  tasks:
+      phpcs:
+        standard: PSR2
+        triggered_by: [php]
+        ignore_patterns:
+          - themes/
+          - public/
+      phpcsfixer2:
+        allow_risky: ~
+        cache_file: ~
+        config: .php_cs
+        rules: []
+        using_cache: ~
+        config_contains_finder: true
+        verbose: true
+        diff: false
+        triggered_by: ['php']

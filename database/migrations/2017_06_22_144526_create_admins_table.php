@@ -1,30 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
+namespace App;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAdminsTable extends Migration
 {
-    public $tablePrefix = 'watercart_';
-
-    public function __construct() {
-        $tablePrefix = \Config::get('admins.tablePrefix');
-        if ($tablePrefix) {
-            $this->tablePrefix = $tablePrefix;
-        }
-    }
-
-    public function getTableName($tableName = ''){
-        return $this->tablePrefix . \Config::get('admins.tableName.' . $tableName);
-    }
-
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create( $this->getTableName('categories'), function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->increments('category_id');
             $table->string('platform')->default('admins')->comment('platform name');
             $table->string('module')->default('posts')->comment('module name');
@@ -35,12 +32,10 @@ class CreateAdminsTable extends Migration
             $table->string('category_description')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('notes')->default('');
-            $table->string('created_by', 100)->default('');
-            $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
-
-        Schema::create( $this->getTableName('posts'), function (Blueprint $table) {
+        // 文章表 Articles
+        Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('posts')->comment('platform english name');
             $table->string('module')->default('posts')->comment('module english name');
@@ -51,19 +46,34 @@ class CreateAdminsTable extends Migration
             $table->string('source_name')->default('source_name');
             $table->string('source_link')->default('source_link');
             $table->longText('content');
-            $table->bigInteger('post_id')->default(0)->comment('post_id');   
-            $table->bigInteger('views')->default(0)->comment('Views Number');   
-            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');   
-            $table->bigInteger('thumb_up')->default(0)->comment('thumb_up Number');   
-            $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');   
+            $table->unsignedInteger('post_id')->default(0)->comment('post_id');
+            $table->unsignedInteger('views')->default(0)->comment('Views Number');
+            $table->unsignedInteger('favorites')->default(0)->comment('Favorite Number');
+            $table->unsignedInteger('thumb_up')->default(0)->comment('thumb_up Number');
+            $table->unsignedInteger('thumb_down')->default(0)->comment('thumb_down Number');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('notes')->default('');
-            $table->string('created_by', 100)->default('');
-            $table->string('updated_by', 100)->default('');
-            $table->nullableTimestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('audited_at')->nullable();
         });
 
-        Schema::create( $this->getTableName('links'), function (Blueprint $table) {
+        // 文章详细内容表 Articles Detail Content
+        Schema::create('article_texts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('user_id')->default(0);
+            $table->unsignedInteger('post_id')->default(0)->comment('post_id');
+            $table->unsignedInteger('section_id')->default(0)->comment('section_id');
+            $table->longText('content')->comment('content');
+            $table->string('ip_address')->default('');
+            $table->string('user_agent')->default('');
+            $table->string('remark')->default('');
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
+        });
+
+        // 友情链接 Frendly Links
+        Schema::create('links', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('admins')->comment('platform name');
             $table->string('module')->default('posts')->comment('module name');
@@ -81,7 +91,8 @@ class CreateAdminsTable extends Migration
             $table->nullableTimestamps();
         });
 
-        Schema::create( $this->getTableName('operation_logs'), function (Blueprint $table) {
+        // 用户操作日志表 User Opteration Logs
+        Schema::create('user_operations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('admins')->comment('platform english name');
             $table->string('module')->default('default')->comment('module english name');
@@ -96,7 +107,8 @@ class CreateAdminsTable extends Migration
             $table->dateTime('created_at');
         });
 
-        Schema::create( $this->getTableName('user_login_logs'), function (Blueprint $table) {
+        // 用户登录日志表 User Login Logs
+        Schema::create('user_login_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('admins')->comment('platform english name');
             $table->string('module')->default('default')->comment('module english name');
@@ -113,11 +125,11 @@ class CreateAdminsTable extends Migration
             $table->dateTime('created_at');
         });
 
-        Schema::create( $this->getTableName('user_meta'), function (Blueprint $table) {
+        Schema::create('user_meta', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('posts')->comment('platform english name');
             $table->string('module')->default('posts')->comment('module english name');
-            $table->string('mobilephone')->default('');
+            $table->string('mobile')->default('');
             $table->string('description')->default('');
             $table->string('website')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
@@ -127,7 +139,7 @@ class CreateAdminsTable extends Migration
             $table->nullableTimestamps();
         });
 
-        Schema::create( $this->getTableName('todolist'), function (Blueprint $table) {
+        Schema::create('todolist', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('todolist')->comment('platform english name');
             $table->string('module')->default('todolist')->comment('module english name');
@@ -139,8 +151,11 @@ class CreateAdminsTable extends Migration
             $table->integer('start_time')->default(0);
             $table->integer('end_time')->default(0);
             $table->integer('deadline')->default(0);
-            $table->enum('progress', ['waiting','delay','doing','done','cancel','closed'])->default('waiting')->comment('progress');   
-            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');   
+            $table->enum('progress', ['waiting', 'delay', 'doing', 'done', 'cancel', 'closed'])
+                ->default('waiting')
+                ->comment('progress')
+            ;
+            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');
             $table->tinyInteger('is_private')->default(0);
             $table->tinyInteger('is_mark')->default(0);
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
@@ -151,7 +166,7 @@ class CreateAdminsTable extends Migration
         });
 
         // Tagas
-        Schema::create( $this->getTableName('tags'), function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('admins')->comment('platform name');
             $table->string('module')->default('posts')->comment('module name');
@@ -164,7 +179,8 @@ class CreateAdminsTable extends Migration
             $table->string('updated_by', 100)->default('');
             $table->nullableTimestamps();
         });
-        Schema::create( $this->getTableName('tag_relations'), function (Blueprint $table) {
+
+        Schema::create('tag_relations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('admins')->comment('platform name');
             $table->string('module')->default('posts')->comment('module name');
@@ -174,7 +190,7 @@ class CreateAdminsTable extends Migration
         });
 
         // pages
-        Schema::create( $this->getTableName('pages'), function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('posts')->comment('platform english name');
             $table->string('module')->default('posts')->comment('module english name');
@@ -183,10 +199,10 @@ class CreateAdminsTable extends Migration
             $table->string('author')->default('');
             $table->string('slug')->default('');
             $table->mediumText('content');
-            $table->bigInteger('views')->default(0)->comment('Views Number');   
-            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');   
-            $table->bigInteger('thumb_up')->default(0)->comment('thumb_up Number');   
-            $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');   
+            $table->bigInteger('views')->default(0)->comment('Views Number');
+            $table->bigInteger('favorites')->default(0)->comment('Favorite Number');
+            $table->bigInteger('thumb_up')->default(0)->comment('thumb_up Number');
+            $table->bigInteger('thumb_down')->default(0)->comment('thumb_down Number');
             $table->string('notes')->default('');
             $table->tinyInteger('status')->default(1)->comment('[STATUS] 1:default, 0:hide, -1:delete');
             $table->string('created_by', 100)->default('');
@@ -195,7 +211,7 @@ class CreateAdminsTable extends Migration
         });
 
         // settings
-        Schema::create( $this->getTableName('settings'), function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('posts')->comment('platform english name');
             $table->string('module')->default('posts')->comment('module english name');
@@ -208,8 +224,8 @@ class CreateAdminsTable extends Migration
             $table->nullableTimestamps();
         });
 
-        // settings
-        Schema::create( $this->getTableName('feedback'), function (Blueprint $table) {
+        // 用户意见反馈 advice or feedback
+        Schema::create('feedback', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type', 30);
             $table->integer('uid')->default(0);
@@ -236,17 +252,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists($this->getTableName('admins.tableName.categories'));  
-        Schema::dropIfExists($this->getTableName('admins.tableName.posts'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.pages'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.links'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.tags'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.tag_relations'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.operation_logs'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.user_login_logs'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.user_meta'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.todolist'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.settings'));    
-        Schema::dropIfExists($this->getTableName('admins.tableName.feedback'));    
+        // Schema::dropIfExists('categories');
     }
 }

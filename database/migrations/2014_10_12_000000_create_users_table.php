@@ -1,15 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
+namespace App;
+
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -26,8 +34,8 @@ class CreateUsersTable extends Migration
             $table->integer('last_time')->default(0)->comment('last-login-time');
             $table->string('email')->unique()->comment('register-email-account');
             $table->string('password');
-            $table->tinyInteger('is_admin')->default(0)->comment('is-admin-account: 1:yes 0:no');;
-            $table->tinyInteger('is_delete')->default(0)->comment('is-delete-account: 1:yes 0:no');;
+            $table->tinyInteger('is_admin')->default(0)->comment('is-admin-account: 1:yes 0:no');
+            $table->tinyInteger('is_delete')->default(0)->comment('is-delete-account: 1:yes 0:no');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,8 +43,6 @@ class CreateUsersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

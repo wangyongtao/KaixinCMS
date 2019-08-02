@@ -1,9 +1,16 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ *
+ * (c) WYT <cnwyt@outlook.com>
+ *
+ * MIT LICENSE.
+ */
+
 use Illuminate\Support\Str;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
@@ -34,7 +41,6 @@ return [
     */
 
     'connections' => [
-
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -54,7 +60,7 @@ return [
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
+            'prefix' => env('DB_PREFIX', 'tb_'),
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
@@ -72,7 +78,7 @@ return [
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
-            'prefix' => '',
+            'prefix' => env('DB_PREFIX', 'tb_'),
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
@@ -90,7 +96,6 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
     ],
 
     /*
@@ -118,7 +123,6 @@ return [
     */
 
     'redis' => [
-
         'client' => env('REDIS_CLIENT', 'predis'),
 
         'options' => [
@@ -141,7 +145,5 @@ return [
             'port' => env('REDIS_PORT', 6379),
             'database' => env('REDIS_CACHE_DB', 1),
         ],
-
     ],
-
 ];
